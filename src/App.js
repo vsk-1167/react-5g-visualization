@@ -20,7 +20,8 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link
+  Link, 
+  Navigate
 } from "react-router-dom";
 
 // Organisms Locally Stored
@@ -67,9 +68,9 @@ function App() {
           <Link to="/search"> Search </Link>
         </nav>
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/home" element={<Home/>}/>
           <Route path="/search" element={<Search/>} />
-          <Route path="*" element={<ErrorPage/>} />
+          <Route path="*" element={<Navigate replace to="/home" />} />
           {/* below are data-driven visualization pages */}
           {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
           <Route path="/dataset" element={<DatasetView/>}/>
