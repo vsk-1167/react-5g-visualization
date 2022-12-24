@@ -1,0 +1,88 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.App {
+  font-family: "Segoe UI", sans-serif;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.split-pane-col {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.split-pane-row {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+}
+
+.split-pane-top,
+.split-pane-bottom,
+.split-pane-right,
+.split-pane-left {
+  flex: flex;
+  display: flexbox;
+}
+
+/* .split-pane-left {
+  width: 1ef
+} */
+
+.split-pane-right {
+  background-color: rgb(255, 0, 0);
+  min-width: 100%;
+}
+
+.split-pane-top{
+  background-color: rgb(156, 104, 169);
+  text-align: left;
+  padding-bottom: 2%;
+  text-overflow: normal;
+  min-width: 100%;
+  min-height: 50vh;
+}
+
+.split-pane-bottom {
+  background-color: rgb(149, 162, 189);
+  text-align: left;
+  text-overflow: normal;
+  flex-grow: 1;
+  padding: 2%;
+}
+
+ul {
+  margin-left: -2%;
+}
+
+ul li {
+  margin: 1rem;
+  list-style-type: square;
+}
+
+ul a {
+  text-decoration: none;
+  color: darkblue;
+  font-size: large;
+}
+
+ul a:hover {
+  color: black;
+}
+
+.tabbed-panel {
+  background-color: rgb(220, 220, 220);
+  flex-grow: 1;
+  height: 100vh;
+}
+
+h1 {
+  color: white;
+  padding: 2%;
+}
