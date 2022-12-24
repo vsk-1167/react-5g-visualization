@@ -18,7 +18,7 @@ import DatasetSplitPane, {
     DatasetSplitPaneTop,
   } from "../Components/DatasetSplitPane"; 
 
-// Site Contexts
+// Site Contexts 
 import OrganismContext from "..//Contexts/OrganismContext";
 
 // Graphs and Plotting
@@ -40,7 +40,7 @@ const organisms = [
     }
   ];
 
-// demo data for chart visualization
+// demo data for chart visualization (switch to hard-code)
 const data = [1, 2, 1, 4, 3, 6] 
 
 const options = {
