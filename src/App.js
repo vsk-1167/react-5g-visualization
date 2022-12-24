@@ -6,7 +6,7 @@ import { useState, React} from "react";
 import { Button} from '@material-ui/core';
 
 // Global Contexts
-import QuoteContext from "./Contexts/QuoteContext";
+//import QuoteContext from "./Contexts/QuoteContext";
 
 // Pages
 import Home from './Pages/Home.js';
@@ -24,41 +24,8 @@ import {
   Navigate
 } from "react-router-dom";
 
-// Organisms Locally Stored
-const organisms = [
-  {
-    id: 1,
-    name: "E. coli",
-    datasets:
-      ['iModulome'],
-  },
-  {
-    id: 2,
-    name: "M. buryatense",
-    datasets: ['kMeans','BIRCH','iModulome'],
-  }
-];
-
-// demo data for chart visualization
-const data = [1, 2, 1, 4, 3, 6] 
-
-const options = {
-  chart: {
-    type: 'spline'
-  },
-  title: {
-    text: 'My chart'
-  },
-  series: [
-    {
-      data: data
-    }
-  ]
-};
 
 function App() {
-
-  const [currQuote, setCurrQuote] = useState(1);
 
   return (
 
@@ -80,8 +47,6 @@ function App() {
       </Router>
     );
   }
-  
-
   
   function About() {
     return <h2>About</h2>;

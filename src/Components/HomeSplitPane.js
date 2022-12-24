@@ -5,18 +5,22 @@ import React, {
     useRef,
     useState,
   } from "react";
+import { useNavigate } from "react-router";
 
 
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
+
+
+// Components
 /**
  * 
  * 
  * @param {*} param0 
  * @returns 
  */
-const HomeSplitPane = ({ children, ...props }) => {
+export const HomeSplitPane = ({ children, ...props }) => {
     const [clientHeight, setClientHeight] = useState(null);
     const [clientWidth, setClientWidth] = useState(null);
 
@@ -46,6 +50,8 @@ export const HomeSplitPaneTop = (props) => {
 
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
   const {organisms, setCurrOrganism } = useContext(OrganismContext);
+
+  const navigate = useNavigate();
         
   useEffect(() => {
     if (!clientHeight) {
@@ -56,6 +62,11 @@ export const HomeSplitPaneTop = (props) => {
     topRef.current.style.minHeight = clientHeight + "px";
     topRef.current.style.maxHeight = clientHeight + "px";
   }, [clientHeight]);
+
+  const switchOrganism = (id) =>{
+    setCurrOrganism(id)
+    navigate("/dataset")
+  }
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
@@ -64,7 +75,7 @@ export const HomeSplitPaneTop = (props) => {
         {organisms.map((el, i) => {
           return (
             <li key={i}>
-              <a href="#" onClick={() => setCurrOrganism(el.id)}>
+              <a href="#" onClick={() => switchOrganism(el.id)}>
                 {el.name}
               </a>
             </li>

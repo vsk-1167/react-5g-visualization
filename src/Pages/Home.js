@@ -1,4 +1,17 @@
 import '../App.css';
+import { useState, React} from "react";
+
+// Material UI Components
+import {Container, 
+  Box, 
+  Tabs, 
+  Tab, 
+  Typography, 
+  Grid, 
+  Item} from '@material-ui/core'
+
+// Custom Site Components
+import TabPanel from "../Components/TabPanel"
 import HomeSplitPane, {
     HomeSplitPaneBottom,
     HomeSplitPaneLeft,
@@ -6,20 +19,16 @@ import HomeSplitPane, {
     HomeSplitPaneTop,
   } from "../Components/HomeSplitPane"; 
 
-import TabPanel from "../Components/TabPanel"
-import {Container, 
-  Box, 
-  Tabs, 
-  Tab, 
-  Typography} from '@material-ui/core'
+// Site Contexts
 import OrganismContext from "..//Contexts/OrganismContext";
-import { useState, React} from "react";
+
+// Graphs and Plotting
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official';
 
 
 
-// Organisms Locally Stored
+// Hard Coded Data: 
 const organisms = [
     {
       id: 1,
@@ -34,52 +43,42 @@ const organisms = [
     }
   ];
 
-// demo data for chart visualization
-const data = [1, 2, 1, 4, 3, 6] 
-
-const options = {
-  chart: {
-    type: 'spline'
-  },
-  title: {
-    text: 'My chart'
-  },
-  series: [
-    {
-      data: data
-    }
-  ]
-};
-
+// Function --> 
 function Home() {
 
-    const [currOrganism, setCurrOrganism] = useState(1);
+    // States:
+    const [currOrganism, setCurrOrganism] = useState(1); 
+
+    const gridstyle = {
+      width: '100vw',
+      height: '100vh',
+      spacing: 0,
+      justify: 'space-around'
+    }
 
     return (
       <div className="App">
 
-          <OrganismContext.Provider value={{ organisms, currOrganism, setCurrOrganism }}>
-              <HomeSplitPane className="split-pane-row">
-              
-                <HomeSplitPaneLeft>
-                  <HomeSplitPane className="split-pane-col">
-                    <HomeSplitPaneTop />
-                    <HomeSplitPaneBottom />
-                  </HomeSplitPane>
-                </HomeSplitPaneLeft>
-                
-                <HomeSplitPaneRight>
-                  {/* <Container>
-                    <HighchartsReact highcharts={Highcharts} options={options}/>  
-                  </Container> */}
+        <OrganismContext.Provider value={{ organisms, currOrganism, setCurrOrganism }}>
 
-                  <Container className='tabbed-panel'>
-                    <TabPanel></TabPanel>
-                  </Container>
-                </HomeSplitPaneRight> 
+            <Grid container spacing ={1} columns={2} style= {gridstyle}>
+              <Grid item xs={6} md ={4}>
+                {/* LEFT PANEL*/}
+                <HomeSplitPane className="split-pane-col">
+                  <HomeSplitPaneTop/>
+                  <HomeSplitPaneBottom />
+                </HomeSplitPane>
+              </Grid>
 
-              </HomeSplitPane>
-          </OrganismContext.Provider>
+              <Grid item xs={6} md={8} >
+                {/*RIGHT PANEL*/}
+                <Container className='tabbed-panel'>
+                  <TabPanel></TabPanel>
+                </Container>
+              </Grid>
+            </Grid>
+        </OrganismContext.Provider>
+
       </div>
     );
     }

@@ -11,10 +11,9 @@ body {
 }
 
 .split-pane-col {
-  width: 100vw;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100vh;
 }
 
 .split-pane-row {
@@ -28,8 +27,8 @@ body {
 .split-pane-bottom,
 .split-pane-right,
 .split-pane-left {
-  flex: 1;
-  overflow: hidden;
+  flex: flex;
+  display: flexbox;
 }
 
 /* .split-pane-left {
@@ -37,14 +36,24 @@ body {
 } */
 
 .split-pane-right {
-  background-color: rgb(217, 217, 217);
-  background-size: 100% 1.2em;
+  background-color: rgb(255, 0, 0);
+  min-width: 100%;
 }
 
-.split-pane-top,  
-.split-pane-bottom {
+.split-pane-top{
   background-color: rgb(156, 104, 169);
   text-align: left;
+  padding-bottom: 2%;
+  text-overflow: normal;
+  min-width: 100%;
+  min-height: 50vh;
+}
+
+.split-pane-bottom {
+  background-color: rgb(149, 162, 189);
+  text-align: left;
+  text-overflow: normal;
+  flex-grow: 1;
   padding: 2%;
 }
 
@@ -68,12 +77,12 @@ ul a:hover {
 }
 
 .tabbed-panel {
-  background-color: rgb(255, 255, 255);
-  margin-top: 5%;
-  min-height: 85%;
-  max-height: 95%;
+  background-color: rgb(178, 178, 178);
+  flex-grow: 1;
+  height: 100vh;
 }
 
 h1 {
-  color: white
+  color: white;
+  padding: 2%;
 }
