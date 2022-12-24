@@ -34,6 +34,8 @@ function App() {
           <Link to="/"> Home </Link>
           <Link to="/search"> Search </Link>
         </nav>
+
+        
         <Routes>
           <Route path="/home" element={<Home/>}/>
           <Route path="/search" element={<Search/>} />
