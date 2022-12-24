@@ -46,7 +46,6 @@ body {
   padding-bottom: 2%;
   text-overflow: normal;
   min-width: 100%;
-  min-height: 50vh;
 }
 
 .split-pane-bottom {
@@ -77,7 +76,7 @@ ul a:hover {
 }
 
 .tabbed-panel {
-  background-color: rgb(178, 178, 178);
+  background-color: rgb(220, 220, 220);
   flex-grow: 1;
   height: 100vh;
 }
