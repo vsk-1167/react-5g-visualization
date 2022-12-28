@@ -78,7 +78,7 @@ export const DatasetSplitPaneTop = (props) => {
  * @returns 
  */
 export const DatasetSplitPaneBottom = (props) => {
-  const { organisms,currOrganism } = useContext(OrganismContext);
+  const { organisms, currOrganism } = useContext(OrganismContext);
 
   const organism_name = organisms.map((el, i) => {
     if(el.id == currOrganism){
@@ -89,7 +89,7 @@ export const DatasetSplitPaneBottom = (props) => {
   console.log(String(organisms))
   return (
     <div {...props} className="split-pane-bottom">
-      Download dataset for <b>organism </b>: {organism_name}
+      Download dataset for <b>organism </b>: {currOrganism}
     </div>
   );
 };

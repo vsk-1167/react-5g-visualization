@@ -49,7 +49,7 @@ export const HomeSplitPaneTop = (props) => {
   const topRef = createRef();
 
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const {organisms, setCurrOrganism } = useContext(OrganismContext);
+  const {organisms, currOrganism, setCurrOrganism } = useContext(OrganismContext);
 
   const navigate = useNavigate();
         

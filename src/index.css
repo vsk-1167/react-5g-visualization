@@ -13,7 +13,8 @@ body {
 .split-pane-col {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100%;
+  overflow: auto;
 }
 
 .split-pane-row {
@@ -30,10 +31,6 @@ body {
   flex: flex;
   display: flexbox;
 }
-
-/* .split-pane-left {
-  width: 1ef
-} */
 
 .split-pane-right {
   background-color: rgb(255, 0, 0);
@@ -80,6 +77,8 @@ ul a:hover {
   background-color: rgb(220, 220, 220);
   flex-grow: 1;
   height: 100vh;
+  padding-top: 2%;
+  overflow: scroll;
 }
 
 h1 {
