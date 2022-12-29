@@ -45,7 +45,7 @@ export const DatasetSplitPaneTop = (props) => {
   const topRef = createRef();
 
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const {organisms, currOrganism, setCurrOrganism } = useContext(OrganismContext);
+  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
         
   useEffect(() => {
     if (!clientHeight) {
@@ -56,18 +56,11 @@ export const DatasetSplitPaneTop = (props) => {
     topRef.current.style.minHeight = clientHeight + "px";
     topRef.current.style.maxHeight = clientHeight + "px";
   }, [clientHeight]);
-
-
-  const organism_name = organisms.map((el, i) => {
-    if(el.id == currOrganism){
-      return el.name
-    }
-  });
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
       <h1>Dataset: [DEMO]</h1>
-      <h2>{currOrganism}</h2>
+      <h2>{currOrganismDataset}</h2>
     </div>
   );
 };
@@ -78,18 +71,17 @@ export const DatasetSplitPaneTop = (props) => {
  * @returns 
  */
 export const DatasetSplitPaneBottom = (props) => {
-  const { organisms, currOrganism } = useContext(OrganismContext);
+  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
 
   const organism_name = organisms.map((el, i) => {
-    if(el.id == currOrganism){
+    if(el.id == currOrganismDataset[0]){
       return el.name
     }
-  })
+  });
 
-  console.log(String(organisms))
   return (
     <div {...props} className="split-pane-bottom">
-      Download dataset for <b>organism </b>: {currOrganism}
+      Download dataset for <b>organism </b>: {organism_name}
     </div>
   );
 };

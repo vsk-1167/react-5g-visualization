@@ -28,27 +28,26 @@ import {
 // Organisms Locally Stored
 const organisms = [
   {
-    id: 1,
-    name: "E. coli",
-    datasets:
-      ['iModulome'],
-  },
-  {
-    id: 2,
+    id: 0,
     name: "M. buryatense",
     datasets: ['kMeans','BIRCH','iModulome'],
-  }
+  }, 
+  {
+    id: 1,
+    name: "E. coli",
+    datasets:['iModulome'],
+  },
 ];
 
 function App() {
 
   //const [currOrganism, setCurrOrganism] = useState(1);
-  const [currOrganism, setCurrOrganism] = useState(1);
+  const [currOrganismDataset, setCurrOrganismDataset] = useState([0,0]);
 
 
   return (
       <Router>
-        <OrganismContext.Provider value={{ organisms, currOrganism, setCurrOrganism }}>
+        <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <nav>
             <Link to="/"> Home </Link>
             <Link to="/search"> Search </Link>
