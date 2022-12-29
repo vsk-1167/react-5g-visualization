@@ -82,6 +82,10 @@ ul a:hover {
 }
 
 h1 {
-  color: white;
+  color: black;
   padding: 2%;
+}
+
+.organism-name {
+  color: white;
 }

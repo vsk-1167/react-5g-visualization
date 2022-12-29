@@ -44,9 +44,16 @@ const DatasetSplitPane = ({ children, ...props }) => {
 export const DatasetSplitPaneTop = (props) => {
   const topRef = createRef();
 
+  // States from context
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
-        
+
+  // Local Variables --> Extracting from State
+  const organism_id = currOrganismDataset[0]
+  const dataset_id = currOrganismDataset[1]
+  const curr_organism_name = organisms[organism_id].name;
+  const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
+
   useEffect(() => {
     if (!clientHeight) {
       setClientHeight((topRef.current.clientHeight));
@@ -59,8 +66,8 @@ export const DatasetSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>Dataset: [DEMO]</h1>
-      <h2>{currOrganismDataset}</h2>
+      <h1 className= "organism-name">{curr_organism_name}</h1>
+      <h1>Dataset: {curr_dataset_name}</h1>
     </div>
   );
 };

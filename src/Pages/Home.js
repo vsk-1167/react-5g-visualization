@@ -11,7 +11,7 @@ import {Container,
   Item} from '@material-ui/core'
 
 // Custom Site Components
-import TabPanel from "../Components/TabPanel"
+import {BasicTabs} from "../Components/TabPanel"
 import HomeSplitPane, {
     HomeSplitPaneBottom,
     HomeSplitPaneLeft,
@@ -48,7 +48,7 @@ function Home() {
           <Grid item xs={6} md={8} >
             {/*RIGHT PANEL*/}
             <Container className='tabbed-panel'>
-              <TabPanel></TabPanel>
+              <BasicTabs></BasicTabs>
             </Container>
           </Grid>
         </Grid>
