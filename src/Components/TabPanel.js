@@ -94,7 +94,7 @@ export const DatasetTabs = (props) =>{
 
   // Context-driven States
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
-  var json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/birch_summary_stringlist.json'
+  var json_api_url = ''
 
   // Temporary Hard-Coded Dataset Matching
   // [TASK: use Azure to directly match the currOrganism dataset to the respective dataset]
@@ -102,6 +102,9 @@ export const DatasetTabs = (props) =>{
   
   
   switch(String(currOrganismDataset)){
+    default: 
+      json_api_url = ''
+      break;
     case "0,0":
       console.log("hello")
       json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/kmeans_summary_stringlist.json'
