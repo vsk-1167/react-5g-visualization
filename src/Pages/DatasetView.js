@@ -38,7 +38,7 @@ function DatasetView() {
     return (
       <div className="App">
         <Grid container spacing ={1} columns={2} style= {gridstyle} >
-          <Grid item xs={6} md ={4} style={itemstyle}>
+          <Grid item xs={6} md ={3} style={itemstyle}>
             {/* LEFT PANEL*/}
             <DatasetSplitPane className="split-pane-col">
                 <DatasetSplitPaneTop />
@@ -46,7 +46,7 @@ function DatasetView() {
             </DatasetSplitPane>
           </Grid>
 
-          <Grid item xs={6} md={8} style={itemstyle}>
+          <Grid item xs={6} md={9} style={itemstyle}>
             {/*RIGHT PANEL*/}
             <Container className='tabbed-panel'>
               <DatasetTabs/>

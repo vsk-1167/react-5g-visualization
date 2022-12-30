@@ -81,6 +81,10 @@ ul a:hover {
   overflow: scroll;
 }
 
+.table-viewer {
+  padding-top: 2%;
+}
+
 h1 {
   color: black;
   padding: 2%;
@@ -88,4 +92,10 @@ h1 {
 
 .organism-name {
   color: white;
+}
+
+.ag-row .ag-cell {
+  display: flex;
+  justify-content: left; /* align horizontal */
+  align-items: center;
 }

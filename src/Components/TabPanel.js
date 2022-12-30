@@ -1,4 +1,11 @@
-import * as React from 'react';
+import React, {
+  createRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import PropTypes from 'prop-types';
 import {Container, 
     Box, 
@@ -13,6 +20,9 @@ import HighchartsReact from 'highcharts-react-official';
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
+// Context
+import OrganismContext from "../Contexts/OrganismContext";
 
 
 
@@ -68,27 +78,58 @@ const options = {
 };
 
 
-// demo data for table in tabulator
-const columns = [
-  { headerName: "Name", field: "name", sortable: true, filter: true },
-  { headerName: "Age", field: "age", sortable: true, filter: true},
-  { headerName: "Favourite Color", field: "col",sortable: true, filter: true},
-  { headerName: "Date Of Birth", field: "dob", sortable: true, filter: true}
-];
-var table_data = [
-  {name:"Oli Bob", age:"12", col:"red", dob:""},
-  {name:"Mary May", age:"1", col:"blue", dob:"14/05/1982"},
-  {name:"Christine Lobowski", age:"42", col:"green", dob:"22/05/1982"},
-  {name:"Brendon Philips", age:"125", col:"orange", dob:"01/08/1980"},
-  {name:"Margret Marmajuke", age:"16", col:"yellow", dob:"31/01/1999"},
-];
-
 export const DatasetTabs = (props) =>{
-  const [value, setValue] = React.useState(0);
 
+  // States
+  const [value, setValue] = React.useState(0);
+  const [rowData, setRowData] = useState([]);
+  const gridRef = useRef();
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  // Context-driven States
+  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
+  var json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/birch_summary_stringlist.json'
+
+  // Temporary Hard-Coded Dataset Matching
+  // [TASK: use Azure to directly match the currOrganism dataset to the respective dataset]
+  console.log(currOrganismDataset)
+  
+  
+  switch(String(currOrganismDataset)){
+    case "0,0":
+      console.log("hello")
+      json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/kmeans_summary_stringlist.json'
+      break;
+    case "0,1":
+      json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/birch_summary_stringlist.json'
+      break;
+  }
+
+
+  useEffect(() => {
+    fetch(json_api_url) 
+    .then(result => result.json())
+    .then(rowData => setRowData(rowData))
+  }, []);
+
+  const autoSizeAll = useCallback((skipHeader) => {
+    const allColumnIds = [];
+    gridRef.current.columnApi.getColumns().forEach((column) => {
+      allColumnIds.push(column.getId());
+    });
+    gridRef.current.columnApi.autoSizeColumns(allColumnIds, skipHeader);
+  }, []);
+  		
+  const columns = [
+  { headerName: "Cluster ID", field: "cluster_id", 
+      sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 145},
+  { headerName: "Number of Genes", field: "num_genes", 
+      sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 190}, 
+  { headerName: "Enriched GO Terms", field: "enriched_go_terms", 
+      sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 8000}
+  ];
 
 
   return (
@@ -102,15 +143,13 @@ export const DatasetTabs = (props) =>{
       </Box>
 
       <TabPanel value={value} index={0}>
-        <Container className='tabbed-panel'>
+        <Container className='table-viewer'>
           <div className="ag-theme-alpine"
-                  style={{
-                    width: '100%', 
-                    height: "100%"
-                }}>
+                  >
                   <AgGridReact
                     columnDefs={columns}
-                    rowData={table_data}
+                    rowData={rowData}
+                    domLayout='autoHeight'
                   />
             </div>
         </Container>
@@ -125,7 +164,7 @@ export const DatasetTabs = (props) =>{
   );
 }
 
-export const BasicTabs = (props) => {
+export const AboutTabs = (props) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
