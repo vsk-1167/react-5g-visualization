@@ -6,7 +6,6 @@ import React, {
     useState,
   } from "react";
 
-
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
