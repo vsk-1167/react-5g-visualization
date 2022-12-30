@@ -13,6 +13,7 @@ import {Container,
     Tab, 
     Typography} from '@material-ui/core'
 
+import { useNavigate } from "react-router";
 
 // Graphs and Plotting
 import Highcharts from 'highcharts';
@@ -80,6 +81,9 @@ const options = {
 
 export const DatasetTabs = (props) =>{
 
+  // Navigation
+  const navigate = useNavigate();
+
   // States
   const [value, setValue] = React.useState(0);
   const [rowData, setRowData] = useState([]);
@@ -127,8 +131,13 @@ export const DatasetTabs = (props) =>{
     // Add event handlers
     console.log('Cell was clicked')
     console.log(event.data['cluster_id'])
-  }
 
+    // Set State for the Current Dataset
+    
+
+    // Navigate to Cluster Page
+    navigate("/cluster")
+  }
 
   return (
     <Box sx={{ width: '100%' }}>
@@ -148,7 +157,8 @@ export const DatasetTabs = (props) =>{
                     columnDefs={columns}
                     rowData={rowData}
                     domLayout='autoHeight'
-                    onRowClicked={event => rowClicked(event)}
+                    onRowDoubleClicked={event => rowClicked(event)}
+                    enableCellTextSelection={true}
                   />
             </div>
         </Container>
@@ -157,6 +167,34 @@ export const DatasetTabs = (props) =>{
         <Container className='tabbed-panel'>
           <HighchartsReact highcharts={Highcharts} options={options}/>   
         </Container>
+      </TabPanel>
+
+    </Box>
+  );
+}
+
+export const ClusterTabs = (props) => {
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <Box sx={{ width: '100%' }}>
+
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tab label="About" {...a11yProps(0)} />
+          <Tab label="Help" {...a11yProps(1)} />
+        </Tabs>
+      </Box>
+
+      <TabPanel value={value} index={0}>
+        Description of the software tool 
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        Instructions for how to use it 
       </TabPanel>
 
     </Box>

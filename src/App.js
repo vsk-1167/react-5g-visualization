@@ -61,7 +61,7 @@ function App() {
             {/* below are data-driven visualization pages */}
             {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
             <Route path="/dataset" element={<DatasetView/>}/>
-            <Route path="/cluster/:cluster_name" element={<ClusterView/>}/>
+            <Route path="/cluster" element={<ClusterView/>}/>
             <Route path="/gene/:gene_id" element={<GeneView/>} />
           </Routes>
         </OrganismContext.Provider>
