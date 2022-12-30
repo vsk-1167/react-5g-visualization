@@ -13,6 +13,7 @@ import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
 // Material UI Components
 import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
+
 // Components
 /**
  * 

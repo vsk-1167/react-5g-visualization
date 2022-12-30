@@ -9,6 +9,9 @@ import React, {
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
+// Material UI Components
+import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
+
 /**
  * 
  * 
@@ -77,17 +80,78 @@ export const DatasetSplitPaneTop = (props) => {
  * @returns 
  */
 export const DatasetSplitPaneBottom = (props) => {
+
+  const topRef = createRef();
+
+  // States from context
+  const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
 
-  const organism_name = organisms.map((el, i) => {
-    if(el.id == currOrganismDataset[0]){
-      return el.name
-    }
+  // Local Variables --> Extracting from State
+  const organism_id = currOrganismDataset[0]
+  const dataset_id = currOrganismDataset[1]
+  const curr_organism_name = organisms[organism_id].name;
+  const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
+
+  // Other States
+  const [errorAlertState, setErrorAlertState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
   });
+
+  const { vertical, horizontal, open } = errorAlertState;
+
+  const handleClick = (newState) => () => {
+    setErrorAlertState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setErrorAlertState({ ...errorAlertState, open: false });
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        X
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <div {...props} className="split-pane-bottom">
-      Download dataset for <b>organism </b>: {organism_name}
+
+      <Grid container spacing={2} direction="column">
+          <Grid item>
+            <Button variant="contained" component="label" size="large" fullWidth="true" paddingBottom={25}         onClick={handleClick({
+          vertical: 'top',
+          horizontal: 'center',
+        })}>
+              Download Cluster Summary File
+              {/* <input hidden accept="image/*" multiple type="file" /> */}
+            </Button>
+          </Grid>
+      </Grid>
+
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="Not Yet Implemented"
+        key={vertical + horizontal}
+        action={action}
+      />
+    </div>
+  );
+
+  return (
+    <div {...props} className="split-pane-bottom">
+      Download dataset for <b>organism </b>: {curr_organism_name}
     </div>
   );
 };

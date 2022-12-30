@@ -114,14 +114,6 @@ export const DatasetTabs = (props) =>{
     .then(rowData => setRowData(rowData))
   }, []);
 
-  const autoSizeAll = useCallback((skipHeader) => {
-    const allColumnIds = [];
-    gridRef.current.columnApi.getColumns().forEach((column) => {
-      allColumnIds.push(column.getId());
-    });
-    gridRef.current.columnApi.autoSizeColumns(allColumnIds, skipHeader);
-  }, []);
-  		
   const columns = [
   { headerName: "Cluster ID", field: "cluster_id", 
       sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 145},
@@ -130,6 +122,12 @@ export const DatasetTabs = (props) =>{
   { headerName: "Enriched GO Terms", field: "enriched_go_terms", 
       sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 8000}
   ];
+
+  const rowClicked = (event) => {
+    // Add event handlers
+    console.log('Cell was clicked')
+    console.log(event.data['cluster_id'])
+  }
 
 
   return (
@@ -150,6 +148,7 @@ export const DatasetTabs = (props) =>{
                     columnDefs={columns}
                     rowData={rowData}
                     domLayout='autoHeight'
+                    onRowClicked={event => rowClicked(event)}
                   />
             </div>
         </Container>
