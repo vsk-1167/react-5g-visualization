@@ -24,6 +24,7 @@ import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 // Context
 import OrganismContext from "../Contexts/OrganismContext";
+import ClusterContext from "../Contexts/ClusterContext";
 
 
 
@@ -60,7 +61,6 @@ function a11yProps(index) {
   };
 }
 
-
 // demo data for chart visualization (switch to hard-code)
 const data = [1, 2, 1, 4, 3, 6] 
 
@@ -94,6 +94,7 @@ export const DatasetTabs = (props) =>{
 
   // Context-driven States
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
+  const {currCluster, setCurrCluster} = useContext(ClusterContext);
   var json_api_url = ''
 
   // Temporary Hard-Coded Dataset Matching
@@ -106,7 +107,6 @@ export const DatasetTabs = (props) =>{
       json_api_url = ''
       break;
     case "0,0":
-      console.log("hello")
       json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/kmeans_summary_stringlist.json'
       break;
     case "0,1":
@@ -130,13 +130,19 @@ export const DatasetTabs = (props) =>{
       sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 8000}
   ];
 
+  // Navigation From Dataset Click
+  const switchCluster = (clusterId) =>{
+    setCurrCluster(clusterId)
+    navigate("/dataset")
+  }
+
   const rowClicked = (event) => {
     // Add event handlers
     console.log('Cell was clicked')
     console.log(event.data['cluster_id'])
 
     // Set State for the Current Dataset
-    
+    switchCluster(event.data['cluster_id'])
 
     // Navigate to Cluster Page
     navigate("/cluster")
@@ -179,6 +185,11 @@ export const DatasetTabs = (props) =>{
 export const ClusterTabs = (props) => {
   const [value, setValue] = React.useState(0);
 
+  // Context-driven States
+  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
+  const {currCluster, setCurrCluster} = useContext(ClusterContext);
+  var json_api_url = ''
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -194,7 +205,8 @@ export const ClusterTabs = (props) => {
       </Box>
 
       <TabPanel value={value} index={0}>
-        Description of the software tool 
+
+        <p>{currCluster}</p>
       </TabPanel>
       <TabPanel value={value} index={1}>
         Instructions for how to use it 
