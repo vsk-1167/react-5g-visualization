@@ -31,13 +31,8 @@ const organisms = [
   {
     id: 0,
     name: "M. buryatense",
-    datasets: ['kMeans','BIRCH','iModulome'],
-  }, 
-  {
-    id: 1,
-    name: "E. coli",
-    datasets:['iModulome'],
-  },
+    datasets: ['kMeans','BIRCH']
+  }
 ];
 
 function App() {
@@ -55,16 +50,16 @@ function App() {
               <Link to="/"> Home </Link>
               <Link to="/search"> Search </Link>
             </nav>
-
             
             <Routes>
               <Route path="/home" element={<Home/>}/>
               <Route path="/search" element={<Search/>} />
-              <Route path="*" element={<Navigate replace to="/home" />} />
+              <Route path="*" element={<Navigate replace to="/error" />} />
               {/* below are data-driven visualization pages */}
               {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
               <Route path="/dataset" element={<DatasetView/>}/>
               <Route path="/cluster" element={<ClusterView/>}/>
+              <Route path="/error" element={<ErrorPage/>}/>
               <Route path="/gene/:gene_id" element={<GeneView/>} />
             </Routes>
           </ClusterContext.Provider>
@@ -73,14 +68,5 @@ function App() {
       </Router>
     );
   }
-  
-  function About() {
-    return <h2>About</h2>;
-  }
-  
-  function Users() {
-    return <h2>Users</h2>;
-  }
-
 
 export default App;

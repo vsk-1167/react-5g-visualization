@@ -19,7 +19,9 @@ import DatasetSplitPane, {
   } from "../Components/DatasetSplitPane"; 
 import {DatasetTabs, BasicTabs} from "../Components/TabPanel";
 
-
+/**
+ * Handles the page rendering for the "dataset-level" view for a selected dataset
+ */
 function DatasetView() {
 
     const itemstyle = {
@@ -27,7 +29,6 @@ function DatasetView() {
       flexDirection: "column"
     }
 
-    //const [currOrganism, setCurrOrganism] = useState(1);
     const gridstyle = {
       width: '100vw',
       height: '100vh',

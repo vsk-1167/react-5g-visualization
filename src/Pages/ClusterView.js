@@ -19,7 +19,9 @@ import ClusterSplitPane, {
   } from "../Components/ClusterSplitPane"; 
 import {ClusterTabs} from "../Components/TabPanel";
 
-
+/**
+ * Handles the page rendering for the "cluster-level" view within a specific dataset
+ */
 function ClusterView() {
 
     const itemstyle = {
@@ -27,7 +29,6 @@ function ClusterView() {
       flexDirection: "column"
     }
 
-    //const [currOrganism, setCurrOrganism] = useState(1);
     const gridstyle = {
       width: '100vw',
       height: '100vh',
@@ -39,7 +40,7 @@ function ClusterView() {
       <div className="App">
         <Grid container spacing ={1} columns={2} style= {gridstyle} >
           <Grid item xs={6} md ={3} style={itemstyle}>
-            {/* LEFT PANEL*/}
+            {/* LEFT PANEL --> labels for page*/}
             <ClusterSplitPane className="split-pane-col">
                 <ClusterSplitPaneTop />
                 <ClusterSplitPaneBottom />
@@ -47,7 +48,7 @@ function ClusterView() {
           </Grid>
 
           <Grid item xs={6} md={9} style={itemstyle}>
-            {/*RIGHT PANEL*/}
+            {/*RIGHT PANEL --> data content*/}
             <Container className='tabbed-panel'>
               <ClusterTabs/>
             </Container>
