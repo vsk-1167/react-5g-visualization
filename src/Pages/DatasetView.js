@@ -18,6 +18,7 @@ import DatasetSplitPane, {
     DatasetSplitPaneTop,
   } from "../Components/DatasetSplitPane"; 
 import {DatasetTabs, BasicTabs} from "../Components/TabPanel";
+import DatasetTabPanel from '../Components/DatasetTabPanel';
 
 /**
  * Handles the page rendering for the "dataset-level" view for a selected dataset
@@ -50,7 +51,7 @@ function DatasetView() {
           <Grid item xs={6} md={9} style={itemstyle}>
             {/*RIGHT PANEL*/}
             <Container className='tabbed-panel'>
-              <DatasetTabs/>
+              <DatasetTabPanel/>
             </Container>
           </Grid>
         </Grid>

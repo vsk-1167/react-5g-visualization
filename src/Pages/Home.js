@@ -11,13 +11,14 @@ import {Container,
   Item} from '@material-ui/core'
 
 // Custom Site Components
-import {AboutTabs} from "../Components/TabPanel"
+//import {AboutTabs} from "../Components/TabPanel"
 import HomeSplitPane, {
     HomeSplitPaneBottom,
     HomeSplitPaneLeft,
     HomeSplitPaneRight,
     HomeSplitPaneTop,
   } from "../Components/HomeSplitPane"; 
+import HomeTabPanel from '../Components/HomeTabPanel';
 
 // Graphs and Plotting
 import Highcharts from 'highcharts'
@@ -48,7 +49,7 @@ function Home() {
           <Grid item xs={6} md={8} >
             {/*RIGHT PANEL*/}
             <Container className='tabbed-panel'>
-              <AboutTabs></AboutTabs>
+              <HomeTabPanel/>
             </Container>
           </Grid>
         </Grid>

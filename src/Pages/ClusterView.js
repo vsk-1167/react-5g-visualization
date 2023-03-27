@@ -17,7 +17,7 @@ import ClusterSplitPane, {
     ClusterSplitPaneRight,
     ClusterSplitPaneTop,
   } from "../Components/ClusterSplitPane"; 
-import {ClusterTabs} from "../Components/TabPanel";
+import ClusterTabPanel from '../Components/ClusterTabPanel';
 
 /**
  * Handles the page rendering for the "cluster-level" view within a specific dataset
@@ -50,7 +50,7 @@ function ClusterView() {
           <Grid item xs={6} md={9} style={itemstyle}>
             {/*RIGHT PANEL --> data content*/}
             <Container className='tabbed-panel'>
-              <ClusterTabs/>
+              <ClusterTabPanel/>
             </Container>
           </Grid>
         </Grid>
