@@ -18,7 +18,7 @@ import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
  * @param {*} param0 
  * @returns 
  */
-const DatasetSplitPane = ({ children, ...props }) => {
+const ClusterSplitPane = ({ children, ...props }) => {
     const [clientHeight, setClientHeight] = useState(null);
     const [clientWidth, setClientWidth] = useState(null);
 
@@ -43,7 +43,7 @@ const DatasetSplitPane = ({ children, ...props }) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneTop = (props) => {
+export const ClusterSplitPaneTop = (props) => {
   const topRef = createRef();
 
   // States from context
@@ -79,7 +79,7 @@ export const DatasetSplitPaneTop = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneBottom = (props) => {
+export const ClusterSplitPaneBottom = (props) => {
 
   const topRef = createRef();
 
@@ -161,7 +161,7 @@ export const DatasetSplitPaneBottom = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneLeft = (props) => {
+export const ClusterSplitPaneLeft = (props) => {
   const topRef = createRef();
   const { clientWidth, setClientWidth } = useContext(SplitPaneContext);
 
@@ -183,7 +183,7 @@ export const DatasetSplitPaneLeft = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneRight = (props) => {
+export const ClusterSplitPaneRight = (props) => {
   const { organisms, currOrganism } = useContext(OrganismContext);
   const organism = organisms.find((el) => el.id === currOrganism);
 
@@ -193,4 +193,4 @@ export const DatasetSplitPaneRight = (props) => {
   );
 };
 
-export default DatasetSplitPane;
+export default ClusterSplitPane;

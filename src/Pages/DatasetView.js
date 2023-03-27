@@ -17,49 +17,18 @@ import DatasetSplitPane, {
     DatasetSplitPaneRight,
     DatasetSplitPaneTop,
   } from "../Components/DatasetSplitPane"; 
+import {DatasetTabs, BasicTabs} from "../Components/TabPanel";
+import DatasetTabPanel from '../Components/DatasetTabPanel';
 
-// Site Contexts
-import OrganismContext from "..//Contexts/OrganismContext";
-
-// Graphs and Plotting
-import Highcharts from 'highcharts'
-import HighchartsReact from 'highcharts-react-official';
-
-// Organisms Locally Stored
-const organisms = [
-    {
-      id: 1,
-      name: "E. coli",
-      datasets:
-        ['iModulome'],
-    },
-    {
-      id: 2,
-      name: "M. buryatense",
-      datasets: ['kMeans','BIRCH','iModulome'],
-    }
-  ];
-
-// demo data for chart visualization
-const data = [1, 2, 1, 4, 3, 6] 
-
-const options = {
-  chart: {
-    type: 'spline'
-  },
-  title: {
-    text: 'My chart'
-  },
-  series: [
-    {
-      data: data
-    }
-  ]
-};
-
+/**
+ * Handles the page rendering for the "dataset-level" view for a selected dataset
+ */
 function DatasetView() {
 
-    const [currOrganism, setCurrOrganism] = useState(1);
+    const itemstyle = {
+      display: "flex", 
+      flexDirection: "column"
+    }
 
     const gridstyle = {
       width: '100vw',
@@ -70,24 +39,22 @@ function DatasetView() {
 
     return (
       <div className="App">
-          <OrganismContext.Provider value={{ organisms, currOrganism, setCurrOrganism }}>
-            <Grid container spacing ={1} columns={2} style= {gridstyle}>
-              <Grid item xs={6} md ={4}>
-                {/* LEFT PANEL*/}
-                <DatasetSplitPane className="split-pane-col">
-                    <DatasetSplitPaneTop />
-                    <DatasetSplitPaneBottom />
-                </DatasetSplitPane>
-              </Grid>
+        <Grid container spacing ={1} columns={2} style= {gridstyle} >
+          <Grid item xs={6} md ={3} style={itemstyle}>
+            {/* LEFT PANEL*/}
+            <DatasetSplitPane className="split-pane-col">
+                <DatasetSplitPaneTop />
+                <DatasetSplitPaneBottom />
+            </DatasetSplitPane>
+          </Grid>
 
-              <Grid item xs={6} md={8} >
-                {/*RIGHT PANEL*/}
-                <Container className='tabbed-panel'>
-                  <HighchartsReact highcharts={Highcharts} options={options}/>
-                </Container>
-              </Grid>
-            </Grid>
-          </OrganismContext.Provider>
+          <Grid item xs={6} md={9} style={itemstyle}>
+            {/*RIGHT PANEL*/}
+            <Container className='tabbed-panel'>
+              <DatasetTabPanel/>
+            </Container>
+          </Grid>
+        </Grid>
       </div>
     );
     }

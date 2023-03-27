@@ -7,6 +7,8 @@ import { Button} from '@material-ui/core';
 
 // Global Contexts
 //import QuoteContext from "./Contexts/QuoteContext";
+import OrganismContext from "./Contexts/OrganismContext";
+import ClusterContext from './Contexts/ClusterContext';
 
 // Pages
 import Home from './Pages/Home.js';
@@ -24,39 +26,47 @@ import {
   Navigate
 } from "react-router-dom";
 
+// Organisms Locally Stored
+const organisms = [
+  {
+    id: 0,
+    name: "M. buryatense",
+    datasets: ['kMeans','BIRCH']
+  }
+];
 
 function App() {
 
+  //const [currOrganism, setCurrOrganism] = useState(1);
+  const [currOrganismDataset, setCurrOrganismDataset] = useState([0,0]);
+  const [currCluster, setCurrCluster] = useState(0)
+
+
   return (
-
       <Router>
-        <nav>
-          <Link to="/"> Home </Link>
-          <Link to="/search"> Search </Link>
-        </nav>
-
+        <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
+          <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
+            <nav>
+              <Link to="/"> Home </Link>
+              <Link to="/search"> Search </Link>
+            </nav>
+            
+            <Routes>
+              <Route path="/home" element={<Home/>}/>
+              <Route path="/search" element={<Search/>} />
+              <Route path="*" element={<Navigate replace to="/error" />} />
+              {/* below are data-driven visualization pages */}
+              {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
+              <Route path="/dataset" element={<DatasetView/>}/>
+              <Route path="/cluster" element={<ClusterView/>}/>
+              <Route path="/error" element={<ErrorPage/>}/>
+              <Route path="/gene/:gene_id" element={<GeneView/>} />
+            </Routes>
+          </ClusterContext.Provider>
+        </OrganismContext.Provider>
         
-        <Routes>
-          <Route path="/home" element={<Home/>}/>
-          <Route path="/search" element={<Search/>} />
-          <Route path="*" element={<Navigate replace to="/home" />} />
-          {/* below are data-driven visualization pages */}
-          {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
-          <Route path="/dataset" element={<DatasetView/>}/>
-          <Route path="/cluster/:cluster_name" element={<ClusterView/>}/>
-          <Route path="/gene/:gene_id" element={<GeneView/>} />
-        </Routes>
       </Router>
     );
   }
-  
-  function About() {
-    return <h2>About</h2>;
-  }
-  
-  function Users() {
-    return <h2>Users</h2>;
-  }
-
 
 export default App;

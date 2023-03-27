@@ -1,10 +1,34 @@
-import * as React from 'react';
+import React, {
+  createRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import PropTypes from 'prop-types';
 import {Container, 
     Box, 
     Tabs, 
     Tab, 
     Typography} from '@material-ui/core'
+
+import { useNavigate } from "react-router";
+
+// Graphs and Plotting
+import Highcharts from 'highcharts';
+import HighchartsReact from 'highcharts-react-official';
+import HighchartsExporting from 'highcharts/modules/exporting';
+import HighchartsAccessibility from 'highcharts/modules/accessibility';
+import {AgGridReact} from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
+// Context
+import OrganismContext from "../Contexts/OrganismContext";
+import ClusterContext from "../Contexts/ClusterContext";
+
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -20,7 +44,6 @@ function TabPanel(props) {
       {value === index && (
         <Box sx={{ p: 3 }}>
           <Typography>{children}</Typography>
-          
         </Box>
       )}
     </div>
@@ -40,30 +63,4 @@ function a11yProps(index) {
   };
 }
 
-export default function BasicTabs() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  return (
-    <Box sx={{ width: '100%' }}>
-
-      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-        <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
-          <Tab label="About" {...a11yProps(0)} />
-          <Tab label="Help" {...a11yProps(1)} />
-        </Tabs>
-      </Box>
-
-      <TabPanel value={value} index={0}>
-        Description of the software tool 
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        Instructions for how to use it 
-      </TabPanel>
-
-    </Box>
-  );
-}
+export default TabPanel;

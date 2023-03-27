@@ -11,43 +11,22 @@ import {Container,
   Item} from '@material-ui/core'
 
 // Custom Site Components
-import TabPanel from "../Components/TabPanel"
+//import {AboutTabs} from "../Components/TabPanel"
 import HomeSplitPane, {
     HomeSplitPaneBottom,
     HomeSplitPaneLeft,
     HomeSplitPaneRight,
     HomeSplitPaneTop,
   } from "../Components/HomeSplitPane"; 
-
-// Site Contexts
-import OrganismContext from "..//Contexts/OrganismContext";
+import HomeTabPanel from '../Components/HomeTabPanel';
 
 // Graphs and Plotting
 import Highcharts from 'highcharts'
 import HighchartsReact from 'highcharts-react-official';
 
 
-
-// Hard Coded Data: 
-const organisms = [
-    {
-      id: 1,
-      name: "E. coli",
-      datasets:
-        ['iModulome'],
-    },
-    {
-      id: 2,
-      name: "M. buryatense",
-      datasets: ['kMeans','BIRCH','iModulome'],
-    }
-  ];
-
 // Function --> 
 function Home() {
-
-    // States:
-    const [currOrganism, setCurrOrganism] = useState(1); 
 
     const gridstyle = {
       width: '100vw',
@@ -58,27 +37,22 @@ function Home() {
 
     return (
       <div className="App">
+        <Grid container spacing ={1} columns={2} style= {gridstyle}>
+          <Grid item xs={6} md ={4}>
+            {/* LEFT PANEL*/}
+            <HomeSplitPane className="split-pane-col">
+              <HomeSplitPaneTop/>
+              <HomeSplitPaneBottom />
+            </HomeSplitPane>
+          </Grid>
 
-        <OrganismContext.Provider value={{ organisms, currOrganism, setCurrOrganism }}>
-
-            <Grid container spacing ={1} columns={2} style= {gridstyle}>
-              <Grid item xs={6} md ={4}>
-                {/* LEFT PANEL*/}
-                <HomeSplitPane className="split-pane-col">
-                  <HomeSplitPaneTop/>
-                  <HomeSplitPaneBottom />
-                </HomeSplitPane>
-              </Grid>
-
-              <Grid item xs={6} md={8} >
-                {/*RIGHT PANEL*/}
-                <Container className='tabbed-panel'>
-                  <TabPanel></TabPanel>
-                </Container>
-              </Grid>
-            </Grid>
-        </OrganismContext.Provider>
-
+          <Grid item xs={6} md={8} >
+            {/*RIGHT PANEL*/}
+            <Container className='tabbed-panel'>
+              <HomeTabPanel/>
+            </Container>
+          </Grid>
+        </Grid>
       </div>
     );
     }

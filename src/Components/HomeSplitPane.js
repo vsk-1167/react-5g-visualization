@@ -7,11 +7,12 @@ import React, {
   } from "react";
 import { useNavigate } from "react-router";
 
-
+// Site Components
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
-
+// Material UI Components
+import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
 
 // Components
 /**
@@ -46,10 +47,11 @@ export const HomeSplitPane = ({ children, ...props }) => {
  * @returns 
  */
 export const HomeSplitPaneTop = (props) => {
-  const topRef = createRef();
 
+  // Context States
+  const topRef = createRef();
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const {organisms, setCurrOrganism } = useContext(OrganismContext);
+  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
 
   const navigate = useNavigate();
         
@@ -63,29 +65,41 @@ export const HomeSplitPaneTop = (props) => {
     topRef.current.style.maxHeight = clientHeight + "px";
   }, [clientHeight]);
 
-  const switchOrganism = (id) =>{
-    setCurrOrganism(id)
+  // Navigation From Dataset Click
+  const switchOrganismDataset = (orgId, datasetId) =>{
+    setCurrOrganismDataset([orgId, datasetId])
     navigate("/dataset")
   }
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>Organisms:</h1>
-      <ul>
+      <h1>Organism Datasets:</h1>
+      <ol>
         {organisms.map((el, i) => {
-          return (
-            <li key={i}>
-              <a href="#" onClick={() => switchOrganism(el.id)}>
-                {el.name}
-              </a>
-            </li>
-          );
+              return (
+                <li key={i}>
+                  <strong>
+                    {el.name}
+                  </strong>
+                  <ul>
+                    {el.datasets.map((data, j) => {
+                      return (
+                        <li key={j}>
+                          <a href="#" onClick={() => switchOrganismDataset(i, j)}>
+                            {data}
+                          </a>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </li>
+              );
         })}
-      </ul>
+      </ol>
     </div>
   );
 };
-      
+
 /**
  * 
  * @param {*} props 
@@ -94,9 +108,68 @@ export const HomeSplitPaneTop = (props) => {
 export const HomeSplitPaneBottom = (props) => {
   const { currOrganism } = useContext(OrganismContext);
 
+  // Other States
+  const [errorAlertState, setErrorAlertState] = React.useState({
+    open: false,
+    vertical: 'top',
+    horizontal: 'center',
+  });
+
+  const { vertical, horizontal, open } = errorAlertState;
+
+  const handleClick = (newState) => () => {
+    setErrorAlertState({ open: true, ...newState });
+  };
+
+  const handleClose = () => {
+    setErrorAlertState({ ...errorAlertState, open: false });
+  };
+
+  const action = (
+    <React.Fragment>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        X
+      </IconButton>
+    </React.Fragment>
+  );
+
   return (
     <div {...props} className="split-pane-bottom">
-      Current <b>organism id</b>: {currOrganism}
+
+      <Grid container spacing={2} direction="column">
+          <Grid item>
+            <Button variant="contained" component="label" size="large" fullWidth="true" paddingBottom={25}         onClick={handleClick({
+          vertical: 'top',
+          horizontal: 'center',
+        })}>
+              Add New Organism/Dataset
+              {/* <input hidden accept="image/*" multiple type="file" /> */}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" component="label" size="large" fullWidth="true" onClick={handleClick({
+          vertical: 'top',
+          horizontal: 'center',
+        })}>
+              Download All Files
+              {/* <input hidden accept="image/*" multiple type="file" /> */}
+            </Button>
+          </Grid>
+      </Grid>
+
+      <Snackbar
+        anchorOrigin={{ vertical, horizontal }}
+        open={open}
+        onClose={handleClose}
+        message="Not Yet Implemented"
+        key={vertical + horizontal}
+        action={action}
+      />
     </div>
   );
 };
