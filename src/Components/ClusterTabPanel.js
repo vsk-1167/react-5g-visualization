@@ -12,6 +12,9 @@ import {Container,
     Typography} from "@material-ui/core";
 import TabPanel from "./TabPanel";
 
+// Data from Azure
+import { BlobServiceClient } from "@azure/storage-blob";
+
 // Plotting
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
@@ -33,54 +36,155 @@ const mockData = [
     [0.2275648549759209,0.7039005339452482,-0.261636305132495,-0.5012012873829056,0.1885422304136769,-0.3489018790139085,0.10583974354358486,-0.4816115910815244,0.19614960997482306,-0.4490470692397409,-0.17503970031006086,0.1008425502002274,-0.5401384655751557,0.14995963499728165,0.1507268197617299,-0.2573405282813382,-0.6075293382401856,-0.5010011406746946,0.11023140990423902,0.30581826326901024]
   ];
   
-  const mockDataLociLabel = ["EQU24_RS00090", "EQU24_RS00265", "EQU24_RS00275", "EQU24_RS00280"];
-  
-  const getOptions = () => ({
-    chart: {
-      type: 'line',
-      width: 800,
-      height: 600,
-      parallelCoordinates: true,
-      parallelAxes: {
-        lineWidth: 2,
-      },
+const mockDataLociLabel = ["EQU24_RS00090", "EQU24_RS00265", "EQU24_RS00275", "EQU24_RS00280"];
+
+const getOptions = () => ({
+  chart: {
+    type: 'line',
+    width: 800,
+    height: 600,
+    parallelCoordinates: true,
+    parallelAxes: {
+      lineWidth: 2,
     },
-    title: {
-      text: 'Parallel Coordinates Chart',
-    },
-    xAxis: {
-      categories: ["LanzaTech","MeOH","NO3_lowO2_slow_growth","NoCu","NoLanthanum","WT_control","WithLanthanum","aa3_KO","crotonic_acid","highCu","highO2_slow_growth","lowCH4","lowCu","lowO2_fast_growth","lowO2_low_iron_fast_growth","lowO2_slow_growth","medCu","slow_growth","uMax","unknown"],
-      offset: 10,
-    },
-    yAxis: [
-      {
-        type: 'spline',
-        min: -1,
-        max: 1,
-        startOnTick: true
-      }
-    ],
-    series: mockData.map((set, i) => ({
-      name: `Loci: ${mockDataLociLabel[i]}`,
-      data: set
-    })),
-    credits: {
-      enabled: false,
+  },
+  title: {
+    text: 'Parallel Coordinates Chart',
+  },
+  xAxis: {
+    categories: ["LanzaTech","MeOH","NO3_lowO2_slow_growth","NoCu","NoLanthanum","WT_control","WithLanthanum","aa3_KO","crotonic_acid","highCu","highO2_slow_growth","lowCH4","lowCu","lowO2_fast_growth","lowO2_low_iron_fast_growth","lowO2_slow_growth","medCu","slow_growth","uMax","unknown"],
+    offset: 10,
+  },
+  yAxis: [
+    {
+      type: 'spline',
+      min: -1,
+      max: 1,
+      startOnTick: true
     }
-  });
+  ],
+  series: mockData.map((set, i) => ({
+    name: `Loci: ${mockDataLociLabel[i]}`,
+    data: set
+  })),
+  credits: {
+    enabled: false,
+  }
+});
+
+// TODO: IMPLEMENT CONNECTION TO AZURE TO DYNAMICALLY QUERY LOOKUP TABLE 
+// const connectionString = "";
+// const containerName = "";
+// const fileName = "";
 
 
 function ClusterTabPanel(props) {
+
+    // States
     const [value, setValue] = React.useState(0);
+    const [geneTableData, setGeneTableData] = useState([]);
+    const [diffExpressionData, setDiffExpressionData] = useState([]);
+    const handleChange = (event, newValue) => {
+      setValue(newValue);
+    };
 
     // Context-driven States
     const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
     const {currCluster, setCurrCluster} = useContext(ClusterContext);
-    var json_api_url = ''
+
+    var url_prefix = '';
   
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+    // selects correct data for the specified [organism, dataset] pair
+    switch(String(currOrganismDataset)){
+        default: 
+        url_prefix = ''
+        break;
+        case "0,0":
+        url_prefix = 'https://blobcontainerdatasets.blob.core.windows.net/indclusterdetails/ordered_kmeans_ind_cluster_data_json/'
+        break;
+        case "0,1":
+        url_prefix = 'https://blobcontainerdatasets.blob.core.windows.net/indclusterdetails/ordered_birch_ind_cluster_data_json/'
+        break;
+    }
+
+    const diff_expression_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_diff_expression.json";
+    const gene_table_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_gene_table.json"; 
+
+    useEffect(() => {
+      fetch(diff_expression_url)
+      .then(result => result.json())
+      .then(diffExpressionData => setDiffExpressionData(diffExpressionData));
+
+      fetch(gene_table_url)
+      .then(result => result.json())
+      .then(geneTableData => setGeneTableData(geneTableData));
+    }, []);
+
+    const table_columns = [
+      { headerName: "Cluster ID", field: "locus_tag", 
+          sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 145},
+      { headerName: "Number of Genes", field: "gene", 
+          sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 190}, 
+      { headerName: "Enriched GO Terms", field: "product", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "start_coord", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "end_coord", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "length", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "group", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "uMax", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "MeOH", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "NoCu", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "lowCu", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "medCu", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "highCu", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "LanzaTech", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "lowCH4", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "lowO2_fast_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "aa3_KO", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "NO3_lowO2_slow_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "highO2_slow_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "lowO2_slow_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "lowO2_fast_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "lowO2_low_iron_fast_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "WithLanthanum", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "NoLanthanum", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "crotonic_acid", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "Enriched GO Terms", field: "slow_growth", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      ];
+
+    // TODO: IMPLEMENT CONNECTION TO AZURE TO DYNAMICALLY QUERY LOOKUP TABLE 
+    // Generate lookup table
+    // useEffect(() => {
+    //   const fetch_data = async() => {
+        
+    //   } 
+
+    //   fetch_data.catch(console.error);
+    // }, []);
+
   
     return (
       <Box sx={{ width: '100%' }}>
@@ -94,6 +198,17 @@ function ClusterTabPanel(props) {
   
         <TabPanel value={value} index={0}>
           <h1>Data Table Here!</h1>
+          <Container className='table-viewer'>
+            <div className="ag-theme-alpine"
+                    >
+                    <AgGridReact
+                        columnDefs={table_columns}
+                        rowData={geneTableData}
+                        domLayout='autoHeight'
+                        enableCellTextSelection={true}
+                    />
+            </div>
+          </Container>
           <p>{currCluster}</p>
           <HighchartsReact highcharts={Highcharts} options={getOptions()} />
         </TabPanel>
