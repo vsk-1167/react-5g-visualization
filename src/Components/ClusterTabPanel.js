@@ -41,8 +41,8 @@ const mockDataLociLabel = ["EQU24_RS00090", "EQU24_RS00265", "EQU24_RS00275", "E
 const getOptions = () => ({
   chart: {
     type: 'line',
-    width: 800,
-    height: 600,
+    width: 1200,
+    height: 800,
     parallelCoordinates: true,
     parallelAxes: {
       lineWidth: 2,
@@ -83,7 +83,7 @@ function ClusterTabPanel(props) {
     // States
     const [value, setValue] = React.useState(0);
     const [geneTableData, setGeneTableData] = useState([]);
-    const [diffExpressionData, setDiffExpressionData] = useState([]);
+    //const [diffExpressionData, setDiffExpressionData] = useState([]);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -95,7 +95,7 @@ function ClusterTabPanel(props) {
     var url_prefix = '';
   
     // selects correct data for the specified [organism, dataset] pair
-    switch(String(currOrganismDataset)){
+    switch(String(currOrganismDataset)){  
         default: 
         url_prefix = ''
         break;
@@ -107,71 +107,78 @@ function ClusterTabPanel(props) {
         break;
     }
 
-    const diff_expression_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_diff_expression.json";
+    console.log(url_prefix);
+
+    //const diff_expression_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_diff_expression.json";
     const gene_table_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_gene_table.json"; 
 
+    console.log(gene_table_url);
+    
+
     useEffect(() => {
-      fetch(diff_expression_url)
-      .then(result => result.json())
-      .then(diffExpressionData => setDiffExpressionData(diffExpressionData));
+      // fetch(diff_expression_url)
+      // .then(result => result.json())
+      // .then(diffExpressionData => setDiffExpressionData(diffExpressionData));
 
       fetch(gene_table_url)
       .then(result => result.json())
       .then(geneTableData => setGeneTableData(geneTableData));
     }, []);
 
+    console.log(geneTableData); 
+
     const table_columns = [
-      { headerName: "Cluster ID", field: "locus_tag", 
-          sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 145},
-      { headerName: "Number of Genes", field: "gene", 
-          sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 190}, 
-      { headerName: "Enriched GO Terms", field: "product", 
+      { headerName: "locus_tag", field: "locus_tag", 
+          sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 145},
+      { headerName: "gene", field: "gene", 
+          sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 100}, 
+      { headerName: "product", field: "product", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
+      { headerName: "start_coord", field: "start_coord", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "start_coord", 
+      { headerName: "end_coord", field: "end_coord", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "end_coord", 
+      { headerName: "length", field: "length", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "length", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "group", 
+      { headerName: "group", field: "group", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "uMax", 
+      { headerName: "uMax", field: "uMax", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "MeOH", 
+      { headerName: "MeOH", field: "MeOH", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "NoCu", 
+      { headerName: "NoCu", field: "NoCu", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "lowCu", 
+      { headerName: "lowCu", field: "lowCu", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "medCu", 
+      { headerName: "medCu", field: "medCu", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "highCu", 
+      { headerName: "highCu", field: "highCu", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "LanzaTech", 
+      { headerName: "LanzaTech", field: "LanzaTech", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "lowCH4", 
+      { headerName: "lowCH4", field: "lowCH4", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "lowO2_fast_growth", 
+      { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "aa3_KO", 
+      { headerName: "aa3_KO", field: "aa3_KO", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "NO3_lowO2_slow_growth", 
+      { headerName: "NO3_lowO2_slow_growth", field: "NO3_lowO2_slow_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "highO2_slow_growth", 
+      { headerName: "highO2_slow_growth", field: "highO2_slow_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "lowO2_slow_growth", 
+      { headerName: "lowO2_slow_growth", field: "lowO2_slow_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "lowO2_fast_growth", 
+      { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "lowO2_low_iron_fast_growth", 
+      { headerName: "lowO2_low_iron_fast_growth", field: "lowO2_low_iron_fast_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "WithLanthanum", 
+      { headerName: "WithLanthanum", field: "WithLanthanum", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "NoLanthanum", 
+      { headerName: "NoLanthanum", field: "NoLanthanum", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "crotonic_acid", 
+      { headerName: "crotonic_acid", field: "crotonic_acid", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "Enriched GO Terms", field: "slow_growth", 
+      { headerName: "slow_growth", field: "slow_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       ];
 
@@ -197,11 +204,11 @@ function ClusterTabPanel(props) {
         </Box>
   
         <TabPanel value={value} index={0}>
-          <h1>Data Table Here!</h1>
+          {/* <h1>Data Table Here!</h1> */}
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"
                     >
-                    <AgGridReact
+                    <AgGridReact  style={{ width: '100%', height: '40%;' }}
                         columnDefs={table_columns}
                         rowData={geneTableData}
                         domLayout='autoHeight'
@@ -209,21 +216,26 @@ function ClusterTabPanel(props) {
                     />
             </div>
           </Container>
-          <p>{currCluster}</p>
-          <HighchartsReact highcharts={Highcharts} options={getOptions()} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
+
+          <Container className='tabbed-panel'>
+              {/* <p>{currCluster}</p> */}
+              <HighchartsReact
+                containerProps={{ style: { width: '100%', height: '100%' } }}
+                options={getOptions()}
+                highcharts={Highcharts}
+              />
+          </Container>
         </TabPanel>
   
       </Box>
     );
 }
 
-ClusterTabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-};
+// ClusterTabPanel.propTypes = {
+//     children: PropTypes.node,
+//     index: PropTypes.number.isRequired,
+//     value: PropTypes.number.isRequired,
+// };
   
 function a11yProps(index) {
     return {

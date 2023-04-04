@@ -82,6 +82,8 @@ function DatasetTabPanel(props) {
         .then(rowData => setRowData(rowData))
     }, []);
 
+    console.log(rowData);
+
     const columns = [
     { headerName: "Cluster ID", field: "cluster_id", 
         sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 145},
@@ -119,8 +121,7 @@ function DatasetTabPanel(props) {
         </Box>
         <TabPanel value={value} index={0}>
             <Container className='table-viewer'>
-            <div className="ag-theme-alpine"
-                    >
+            <div className="ag-theme-alpine">
                     <AgGridReact
                         columnDefs={columns}
                         rowData={rowData}

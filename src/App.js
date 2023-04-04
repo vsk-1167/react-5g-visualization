@@ -47,7 +47,7 @@ function App() {
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
             <nav>
-              <Link to="/"> Home </Link>
+              <Link to="/home"> Home </Link>
               <Link to="/search"> Search </Link>
             </nav>
             
