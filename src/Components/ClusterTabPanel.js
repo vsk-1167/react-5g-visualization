@@ -134,11 +134,11 @@ function ClusterTabPanel(props) {
           sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 100}, 
       { headerName: "product", field: "product", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
+      { headerName: "length", field: "length", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 100},
       { headerName: "start_coord", field: "start_coord", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "end_coord", field: "end_coord", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      { headerName: "length", field: "length", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "group", field: "group", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
@@ -205,6 +205,9 @@ function ClusterTabPanel(props) {
   
         <TabPanel value={value} index={0}>
           {/* <h1>Data Table Here!</h1> */}
+          <Container className="cluster-explore-options">
+            
+          </Container>
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"
                     >
@@ -213,6 +216,8 @@ function ClusterTabPanel(props) {
                         rowData={geneTableData}
                         domLayout='autoHeight'
                         enableCellTextSelection={true}
+                        pagination={true}
+                        paginationPageSize={10}
                     />
             </div>
           </Container>
