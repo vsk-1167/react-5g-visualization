@@ -86,12 +86,12 @@ ul a:hover {
 }
 
 h1 {
-  color: black;
+  color: white;
   padding: 2%;
 }
 
-.organism-name {
-  color: white;
+.black-header {
+  color: black;
 }
 
 .ag-row .ag-cell {

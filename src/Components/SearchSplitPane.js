@@ -5,20 +5,23 @@ import React, {
     useRef,
     useState,
   } from "react";
+import { useNavigate } from "react-router";
 
+// Site Components
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
 // Material UI Components
 import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
 
+// Components
 /**
  * 
  * 
  * @param {*} param0 
  * @returns 
  */
-const DatasetSplitPane = ({ children, ...props }) => {
+export const SearchSplitPane = ({ children, ...props }) => {
     const [clientHeight, setClientHeight] = useState(null);
     const [clientWidth, setClientWidth] = useState(null);
 
@@ -43,19 +46,15 @@ const DatasetSplitPane = ({ children, ...props }) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneTop = (props) => {
-  const topRef = createRef();
+export const SearchSplitPaneTop = (props) => {
 
-  // States from context
+  // Context States
+  const topRef = createRef();
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
 
-  // Local Variables --> Extracting from State
-  const organism_id = currOrganismDataset[0]
-  const dataset_id = currOrganismDataset[1]
-  const curr_organism_name = organisms[organism_id].name;
-  const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
-
+  const navigate = useNavigate();
+        
   useEffect(() => {
     if (!clientHeight) {
       setClientHeight((topRef.current.clientHeight));
@@ -65,33 +64,27 @@ export const DatasetSplitPaneTop = (props) => {
     topRef.current.style.minHeight = clientHeight + "px";
     topRef.current.style.maxHeight = clientHeight + "px";
   }, [clientHeight]);
+
+  // Navigation From Dataset Click
+  const switchOrganismDataset = (orgId, datasetId) =>{
+    setCurrOrganismDataset([orgId, datasetId])
+    navigate("/dataset")
+  }
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>{curr_organism_name}</h1>
-      <h1 className="black-header">Dataset: {curr_dataset_name}</h1>
+      <h1>Select Search Options</h1>
     </div>
   );
 };
-      
+
 /**
  * 
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneBottom = (props) => {
-
-  const topRef = createRef();
-
-  // States from context
-  const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
-  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
-
-  // Local Variables --> Extracting from State
-  const organism_id = currOrganismDataset[0]
-  const dataset_id = currOrganismDataset[1]
-  const curr_organism_name = organisms[organism_id].name;
-  const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
+export const SearchSplitPaneBottom = (props) => {
+  const { currOrganism } = useContext(OrganismContext);
 
   // Other States
   const [errorAlertState, setErrorAlertState] = React.useState({
@@ -132,7 +125,7 @@ export const DatasetSplitPaneBottom = (props) => {
           vertical: 'top',
           horizontal: 'center',
         })}>
-              Download Cluster Summary File
+              Download Query Results
               {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>
           </Grid>
@@ -148,12 +141,6 @@ export const DatasetSplitPaneBottom = (props) => {
       />
     </div>
   );
-
-  return (
-    <div {...props} className="split-pane-bottom">
-      Download dataset for <b>organism </b>: {curr_organism_name}
-    </div>
-  );
 };
 
 /**
@@ -161,7 +148,7 @@ export const DatasetSplitPaneBottom = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneLeft = (props) => {
+export const SearchSplitPaneLeft = (props) => {
   const topRef = createRef();
   const { clientWidth, setClientWidth } = useContext(SplitPaneContext);
 
@@ -183,7 +170,7 @@ export const DatasetSplitPaneLeft = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const DatasetSplitPaneRight = (props) => {
+export const SearchSplitPaneRight = (props) => {
   const { organisms, currOrganism } = useContext(OrganismContext);
   const organism = organisms.find((el) => el.id === currOrganism);
 
@@ -193,4 +180,4 @@ export const DatasetSplitPaneRight = (props) => {
   );
 };
 
-export default DatasetSplitPane;
+export default SearchSplitPane;

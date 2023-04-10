@@ -71,9 +71,9 @@ export const ClusterSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1 className= "organism-name">{curr_organism_name}</h1>
-      <h1>Dataset: {curr_dataset_name}</h1>
-      <h1>Cluster: {curr_cluster}</h1>
+      <h1>{curr_organism_name}</h1>
+      <h1 className= "black-header">Dataset: {curr_dataset_name}</h1>
+      <h1 className= "black-header">Cluster: {curr_cluster}</h1>
     </div>
   );
 };

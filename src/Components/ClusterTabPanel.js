@@ -38,44 +38,6 @@ const mockData = [
   
 const mockDataLociLabel = ["EQU24_RS00090", "EQU24_RS00265", "EQU24_RS00275", "EQU24_RS00280"];
 
-const getOptions = () => ({
-  chart: {
-    type: 'line',
-    width: 1200,
-    height: 800,
-    parallelCoordinates: true,
-    parallelAxes: {
-      lineWidth: 2,
-    },
-  },
-  title: {
-    text: 'Parallel Coordinates Chart',
-  },
-  xAxis: {
-    categories: ["LanzaTech","MeOH","NO3_lowO2_slow_growth","NoCu","NoLanthanum","WT_control","WithLanthanum","aa3_KO","crotonic_acid","highCu","highO2_slow_growth","lowCH4","lowCu","lowO2_fast_growth","lowO2_low_iron_fast_growth","lowO2_slow_growth","medCu","slow_growth","uMax","unknown"],
-    offset: 10,
-  },
-  yAxis: [
-    {
-      type: 'spline',
-      min: -1,
-      max: 1,
-      startOnTick: true
-    }
-  ],
-  series: mockData.map((set, i) => ({
-    name: `Loci: ${mockDataLociLabel[i]}`,
-    data: set
-  })),
-  credits: {
-    enabled: false,
-  }
-});
-
-// TODO: IMPLEMENT CONNECTION TO AZURE TO DYNAMICALLY QUERY LOOKUP TABLE 
-// const connectionString = "";
-// const containerName = "";
-// const fileName = "";
 
 
 function ClusterTabPanel(props) {
@@ -83,7 +45,7 @@ function ClusterTabPanel(props) {
     // States
     const [value, setValue] = React.useState(0);
     const [geneTableData, setGeneTableData] = useState([]);
-    //const [diffExpressionData, setDiffExpressionData] = useState([]);
+    const [diffExpressionData, setDiffExpressionData] = useState([]);
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
@@ -109,23 +71,64 @@ function ClusterTabPanel(props) {
 
     console.log(url_prefix);
 
-    //const diff_expression_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_diff_expression.json";
+    const diff_expression_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_diff_expression.json";
     const gene_table_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_gene_table.json"; 
 
     console.log(gene_table_url);
     
 
     useEffect(() => {
-      // fetch(diff_expression_url)
-      // .then(result => result.json())
-      // .then(diffExpressionData => setDiffExpressionData(diffExpressionData));
+      fetch(diff_expression_url)
+      .then(result => result.json())
+      .then(diffExpressionData => setDiffExpressionData(diffExpressionData));
 
       fetch(gene_table_url)
       .then(result => result.json())
       .then(geneTableData => setGeneTableData(geneTableData));
     }, []);
 
-    console.log(geneTableData); 
+    diffExpressionData.forEach(function(user) {
+      console.log(user.locus_tag);
+    }); 
+
+    var keys = [];
+    var exludeColList = ["gene", "product", "locus_tag", "cluster_id"]
+    for(var k in diffExpressionData[0]){
+      if(!exludeColList.includes(k)){
+        keys.push(k);
+      }
+    }
+    console.log(keys);
+
+    const getOptions = () => ({
+      chart: {
+        type: 'line',
+        width: 1200,
+        height: 800,
+        parallelCoordinates: true,
+        parallelAxes: {
+          lineWidth: 2,
+        },
+      },
+      title: {
+        text: 'Parallel Coordinates Chart',
+      },
+      xAxis: {keys,
+        offset: 10,
+      },
+      yAxis: [
+        {
+          type: 'spline',
+          min: -1,
+          max: 1,
+          startOnTick: true
+        }
+      ],
+      series: diffExpressionData,
+      credits: {
+        enabled: false,
+      }
+    });
 
     const table_columns = [
       { headerName: "locus_tag", field: "locus_tag", 
@@ -181,17 +184,6 @@ function ClusterTabPanel(props) {
       { headerName: "slow_growth", field: "slow_growth", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       ];
-
-    // TODO: IMPLEMENT CONNECTION TO AZURE TO DYNAMICALLY QUERY LOOKUP TABLE 
-    // Generate lookup table
-    // useEffect(() => {
-    //   const fetch_data = async() => {
-        
-    //   } 
-
-    //   fetch_data.catch(console.error);
-    // }, []);
-
   
     return (
       <Box sx={{ width: '100%' }}>
