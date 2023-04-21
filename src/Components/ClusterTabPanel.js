@@ -15,16 +15,17 @@ import TabPanel from "./TabPanel";
 // Data from Azure
 import { BlobServiceClient } from "@azure/storage-blob";
 
+// Contexts
+import OrganismContext from "../Contexts/OrganismContext";
+import ClusterContext from "../Contexts/ClusterContext";
+
 // Plotting
 import Highcharts from 'highcharts';
 import HighchartsReact from "highcharts-react-official";
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
-
-// Contexts
-import OrganismContext from "../Contexts/OrganismContext";
-import ClusterContext from "../Contexts/ClusterContext";
+require("highcharts/modules/exporting")(Highcharts);
 
 // Data
 // demo data for chart visualization (switch to hard-code)
@@ -87,9 +88,9 @@ function ClusterTabPanel(props) {
       .then(geneTableData => setGeneTableData(geneTableData));
     }, []);
 
-    diffExpressionData.forEach(function(user) {
-      console.log(user.locus_tag);
-    }); 
+    // diffExpressionData.forEach(function(user) {
+    //   console.log(user.locus_tag);
+    // }); 
 
     var keys = [];
     var exludeColList = ["gene", "product", "locus_tag", "cluster_id"]
@@ -100,6 +101,13 @@ function ClusterTabPanel(props) {
     }
     console.log(keys);
 
+    const expValues = diffExpressionData.map(i => Object.values(i).splice(2, keys.length))
+    const lociNames = diffExpressionData.map(i => Object.values(i).splice(0, 1)).flat()
+    console.log(expValues);
+
+    const maxExpVal = Math.ceil(Math.max(...[].concat(...expValues)));
+    const minExpVal = Math.floor(Math.min(...[].concat(...expValues)));
+
     const getOptions = () => ({
       chart: {
         type: 'line',
@@ -109,26 +117,73 @@ function ClusterTabPanel(props) {
         parallelAxes: {
           lineWidth: 2,
         },
+        zoomType: 'xy',
+        panning: true,
+        panKey: 'shift'
       },
       title: {
         text: 'Parallel Coordinates Chart',
       },
-      xAxis: {keys,
+      xAxis: {
+        categories: keys,
         offset: 10,
       },
       yAxis: [
         {
           type: 'spline',
-          min: -1,
-          max: 1,
-          startOnTick: true
+          min: minExpVal,
+          max: maxExpVal,
+          startOnTick: false
         }
       ],
-      series: diffExpressionData,
+      series: expValues.map((set, i) => ({
+        name: `Loci: ${lociNames[i]}`,
+        data: set
+      })),
       credits: {
         enabled: false,
-      }
+      },
+      legend:{ enabled:false },
+      exporting: {
+        buttons: {
+            contextButton: {
+                theme: {
+                    zIndex: 100   
+                }
+            }
+        }
+    }
     });
+
+    // const getOptions = () => ({
+    //   chart: {
+    //     type: 'spline',
+    //     width: 1200,
+    //     height: 800,
+    //     parallelCoordinates: true,
+    //     parallelAxes: {
+    //       lineWidth: 2,
+    //     },
+    //   },
+    //   title: {
+    //     text: "Parallel Coordinates PLot",
+    //   },
+    //   xAxis: {categories: keys,
+    //     offset: 10,
+    //   },
+    //   yAxis: [
+    //     {
+    //       type: 'spline',
+    //       min: -1,
+    //       max: 1,
+    //       startOnTick: true
+    //     }
+    //   ],
+    //   series: trimmed,
+    //   credits: {
+    //     enabled: false,
+    //   }
+    // });
 
     const table_columns = [
       { headerName: "locus_tag", field: "locus_tag", 
