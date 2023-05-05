@@ -101,8 +101,8 @@ function DatasetTabPanel(props) {
 
     const rowClicked = (event) => {
         // Add event handlers
-        console.log('Cell was clicked')
-        console.log(event.data['cluster_id'])
+        // console.log('Cell was clicked')
+        // console.log(event.data['cluster_id'])
 
         // Set State for the Current Dataset
         switchCluster(event.data['cluster_id'])
