@@ -73,14 +73,14 @@ export const HomeSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>Organism Datasets:</h1>
+      <h1>Select Clustering Dataset:</h1>
       <ol>
         {organisms.map((el, i) => {
               return (
                 <li key={i}>
-                  <strong>
+                  <h3>
                     {el.name}
-                  </strong>
+                  </h3>
                   <ul>
                     {el.datasets.map((data, j) => {
                       return (

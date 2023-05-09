@@ -73,7 +73,20 @@ export const SearchSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>Select Search Options</h1>
+      <h1>Select Organism for Search:</h1>
+      <ol>
+        {organisms.map((el, i) => {
+              return (
+                <li key={i}>
+                  <h3>
+                    {<a href="#" onClick={() => switchOrganismDataset(i, 0)}>
+                            {el.name}
+                          </a>}
+                  </h3>
+                </li>
+              );
+        })}
+      </ol>
     </div>
   );
 };
