@@ -12,14 +12,6 @@ import {Container,
   CardContent, 
     Button} from '@material-ui/core'
 
-// Custom Site Components
-import DatasetSplitPane, {
-    DatasetSplitPaneBottom,
-    DatasetSplitPaneLeft,
-    DatasetSplitPaneRight,
-    DatasetSplitPaneTop,
-  } from "../Components/DatasetSplitPane"; 
-import {DatasetTabs, BasicTabs} from "../Components/TabPanel";
 import { useNavigate } from 'react-router';
 
 /**
@@ -46,20 +38,7 @@ function ErrorPage() {
 
     return (
       <div className="App">
-
-            <Grid container spacing ={1} columns={2} style= {gridstyle} >
-                <Grid item xs={6} md ={3} style={itemstyle}>
-                    {/* LEFT PANEL*/}
-                    <DatasetSplitPane className="split-pane-col">
-                        <DatasetSplitPaneTop />
-                        <DatasetSplitPaneBottom />
-                    </DatasetSplitPane>
-                </Grid>
-
-                <Grid item xs={6} md={9} style={itemstyle}>
-                    {/*RIGHT PANEL*/}
-                    <Container className='tabbed-panel'>
-                    <Card sx={{ minWidth: 275 }}>
+            <Card sx={{ minWidth: 275 }}>
                         <CardContent>
                         <Typography variant="h2" component="h2">
                             Couldn't Find Page 
@@ -71,11 +50,7 @@ function ErrorPage() {
                             Return Home
                         </Button>
                         </CardContent>
-                    </Card>
-                    </Container>
-                </Grid>
-            </Grid>
-            
+            </Card>
       </div>
     );
     }

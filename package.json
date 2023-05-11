@@ -1,8 +1,8 @@
 {
+  "homepage": "https://gitname.github.io/home",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://gitname.github.io/home",
   "dependencies": {
     "@material-ui/core": "^4.12.4",
     "@testing-library/jest-dom": "^5.16.5",

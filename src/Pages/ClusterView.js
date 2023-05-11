@@ -26,14 +26,14 @@ function ClusterView() {
 
     const itemstyle = {
       display: "flex", 
-      flexDirection: "column"
+      flexDirection: "column", 
+      justify: 'stretch'
     }
 
     const gridstyle = {
       width: '100vw',
       height: '100vh',
-      spacing: 0,
-      justify: 'space-around'
+      spacing: 0
     }
 
     return (

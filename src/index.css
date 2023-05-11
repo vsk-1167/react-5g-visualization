@@ -75,9 +75,10 @@ ul a:hover {
 
 .tabbed-panel {
   background-color: rgb(220, 220, 220);
-  flex-grow: 1;
+  flex-wrap: wrap;
+  align-items: flex-start;
   height: 100vh;
-  padding-top: 2%;
+  padding-top: 1%;
   overflow: scroll;
 }
 
@@ -86,12 +87,12 @@ ul a:hover {
 }
 
 h1 {
-  color: black;
+  color: white;
   padding: 2%;
 }
 
-.organism-name {
-  color: white;
+.black-header {
+  color: black;
 }
 
 .ag-row .ag-cell {

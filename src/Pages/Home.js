@@ -50,7 +50,7 @@ function Home() {
             {/*RIGHT PANEL*/}
             <Container className='tabbed-panel'>
               <HomeTabPanel/>
-            </Container>
+            </Container> 
           </Grid>
         </Grid>
       </div>

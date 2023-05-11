@@ -21,7 +21,7 @@ import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
  * @param {*} param0 
  * @returns 
  */
-export const HomeSplitPane = ({ children, ...props }) => {
+export const SearchSplitPane = ({ children, ...props }) => {
     const [clientHeight, setClientHeight] = useState(null);
     const [clientWidth, setClientWidth] = useState(null);
 
@@ -46,7 +46,7 @@ export const HomeSplitPane = ({ children, ...props }) => {
  * @param {*} props 
  * @returns 
  */
-export const HomeSplitPaneTop = (props) => {
+export const SearchSplitPaneTop = (props) => {
 
   // Context States
   const topRef = createRef();
@@ -73,25 +73,16 @@ export const HomeSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>Select Clustering Dataset:</h1>
+      <h1>Select Organism for Search:</h1>
       <ol>
         {organisms.map((el, i) => {
               return (
                 <li key={i}>
                   <h3>
-                    {el.name}
+                    {<a href="#" onClick={() => switchOrganismDataset(i, 0)}>
+                            {el.name}
+                          </a>}
                   </h3>
-                  <ul>
-                    {el.datasets.map((data, j) => {
-                      return (
-                        <li key={j}>
-                          <a href="#" onClick={() => switchOrganismDataset(i, j)}>
-                            {data}
-                          </a>
-                        </li>
-                      );
-                    })}
-                  </ul>
                 </li>
               );
         })}
@@ -105,7 +96,7 @@ export const HomeSplitPaneTop = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const HomeSplitPaneBottom = (props) => {
+export const SearchSplitPaneBottom = (props) => {
   const { currOrganism } = useContext(OrganismContext);
 
   // Other States
@@ -147,16 +138,7 @@ export const HomeSplitPaneBottom = (props) => {
           vertical: 'top',
           horizontal: 'center',
         })}>
-              Add New Organism/Dataset
-              {/* <input hidden accept="image/*" multiple type="file" /> */}
-            </Button>
-          </Grid>
-          <Grid item>
-            <Button variant="contained" component="label" size="large" fullWidth="true" onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'center',
-        })}>
-              Download All Files
+              Download Query Results
               {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>
           </Grid>
@@ -179,7 +161,7 @@ export const HomeSplitPaneBottom = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const HomeSplitPaneLeft = (props) => {
+export const SearchSplitPaneLeft = (props) => {
   const topRef = createRef();
   const { clientWidth, setClientWidth } = useContext(SplitPaneContext);
 
@@ -201,7 +183,7 @@ export const HomeSplitPaneLeft = (props) => {
  * @param {*} props 
  * @returns 
  */
-export const HomeSplitPaneRight = (props) => {
+export const SearchSplitPaneRight = (props) => {
   const { organisms, currOrganism } = useContext(OrganismContext);
   const organism = organisms.find((el) => el.id === currOrganism);
 
@@ -211,4 +193,4 @@ export const HomeSplitPaneRight = (props) => {
   );
 };
 
-export default HomeSplitPane;
+export default SearchSplitPane;

@@ -3,7 +3,7 @@ import './App.css';
 import { useState, React} from "react";
 
 // Material UI Components
-import { Button} from '@material-ui/core';
+import { Button, AppBar, Toolbar, Typography} from '@material-ui/core';
 
 // Global Contexts
 //import QuoteContext from "./Contexts/QuoteContext";
@@ -23,6 +23,7 @@ import {
   Routes,
   Route,
   Link, 
+  NavLink, 
   Navigate
 } from "react-router-dom";
 
@@ -46,11 +47,18 @@ function App() {
       <Router>
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
-            <nav>
-              <Link to="/"> Home </Link>
-              <Link to="/search"> Search </Link>
-            </nav>
-            
+            <AppBar position="static">
+              <Toolbar>
+                <Button color="inherit">
+                  <NavLink to="/home" style={{color: 'white'}}> Home </NavLink>
+                </Button>
+
+                <Button color="inherit">
+                  <NavLink to="/search" style={{color: 'white'}}> Search </NavLink>
+                </Button>
+              </Toolbar>
+            </AppBar>
+
             <Routes>
               <Route path="/home" element={<Home/>}/>
               <Route path="/search" element={<Search/>} />

@@ -8,6 +8,7 @@ import React, {
 
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
+import ClusterContext from "../Contexts/ClusterContext";
 
 // Material UI Components
 import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
@@ -49,12 +50,14 @@ export const ClusterSplitPaneTop = (props) => {
   // States from context
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
+  const {currCluster, setCurrCluster} = useContext(ClusterContext);
 
   // Local Variables --> Extracting from State
   const organism_id = currOrganismDataset[0]
   const dataset_id = currOrganismDataset[1]
   const curr_organism_name = organisms[organism_id].name;
   const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
+  const curr_cluster = currCluster;
 
   useEffect(() => {
     if (!clientHeight) {
@@ -68,8 +71,9 @@ export const ClusterSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1 className= "organism-name">{curr_organism_name}</h1>
-      <h1>Dataset: {curr_dataset_name}</h1>
+      <h1>{curr_organism_name}</h1>
+      <h1 className= "black-header">Dataset: {curr_dataset_name}</h1>
+      <h1 className= "black-header">Cluster: {curr_cluster}</h1>
     </div>
   );
 };
