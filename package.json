@@ -1,5 +1,5 @@
 {
-  "homepage": "https://gitname.github.io/home",
+  "homepage": "https://vsk-1167.github.io/react-5g-visualization",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -46,5 +46,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^5.0.0"
   }
 }
