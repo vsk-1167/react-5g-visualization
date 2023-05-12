@@ -70,6 +70,7 @@ export const DatasetSplitPaneTop = (props) => {
     <div {...props} className="split-pane-top" ref={topRef}>
       <h1>{curr_organism_name}</h1>
       <h1 className="black-header">Dataset: {curr_dataset_name}</h1>
+      <h3 className="black-header">Algorithm Parameters: </h3>
     </div>
   );
 };

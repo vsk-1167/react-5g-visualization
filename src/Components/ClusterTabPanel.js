@@ -253,7 +253,7 @@ function ClusterTabPanel(props) {
           checkboxSelection: true,
           showDisabledCheckboxes: true,},
       { headerName: "gene", field: "gene", 
-          sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 100}, 
+          sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 110}, 
       { headerName: "product", field: "product", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
       { headerName: "length", field: "length", 
@@ -319,55 +319,65 @@ function ClusterTabPanel(props) {
         var selLocusTag = "Loci: " + event.data['locus_tag']
 
         if(selected){
-          chartComponentRef.current.chart.series.forEach(series => {
-            series.data.forEach(axis => {
-              if(selLocusTag === axis.series.name ){
-                axis.series.update({
-                  lineWidth: 7,
-                  zIndex: 1000,
-                  shadow:{
-                    color: 'black',
-                    width: 5,//5000/zIndex.drawer,
-                    opacity: .8,
-                    offsetX: 0,
-                    offsetY: 0,
-                  },
-                  marker:{
-                    radius: 8, 
-                    symbol: "square",
-                    borderColor: "black",
-                    lineColor: "black", 
-                    lineWidth: 1
-                  },
-                  hover: true
-                })
-                console.log(selLocusTag)
-                //lociChange = axis.series.name;
-                //setLociForActChange(axis.series.name);
-                activelyClickedLoci.set(selLocusTag, true)
-              } 
-            })
-          });
+          try {
+            chartComponentRef.current.chart.series.forEach(series => {
+              series.data.forEach(axis => {
+                if(selLocusTag === axis.series.name ){
+                  axis.series.update({
+                    lineWidth: 7,
+                    zIndex: 1000,
+                    shadow:{
+                      color: 'black',
+                      width: 5,//5000/zIndex.drawer,
+                      opacity: .8,
+                      offsetX: 0,
+                      offsetY: 0,
+                    },
+                    marker:{
+                      radius: 8, 
+                      symbol: "square",
+                      borderColor: "black",
+                      lineColor: "black", 
+                      lineWidth: 1
+                    },
+                    hover: true
+                  })
+                  console.log(selLocusTag)
+                  //lociChange = axis.series.name;
+                  //setLociForActChange(axis.series.name);
+                  activelyClickedLoci.set(selLocusTag, true)
+                } 
+              })
+            });
+          } catch (error) {
+            console.log(error)
+          }
+          
         } else{
-          chartComponentRef.current.chart.series.forEach(series => {
-            series.data.forEach(axis => {
-              if(selLocusTag === axis.series.name ){
-                axis.series.update({
-                  lineWidth: 2, 
-                  shadow: false,
-                  hover: true,
-                  marker:{
-                    radius: 3, 
-                    symbol: "circle", 
-                    lineWidth: 0
-                  }
-                })
-                //lociChange = axis.series.name;
-                //setLociForActChange(axis.series.name);
-                activelyClickedLoci.set(axis.series.name, false)
-              } 
-            })
-          });
+          try {
+            chartComponentRef.current.chart.series.forEach(series => {
+              series.data.forEach(axis => {
+                if(selLocusTag === axis.series.name ){
+                  axis.series.update({
+                    lineWidth: 2, 
+                    shadow: false,
+                    hover: true,
+                    marker:{
+                      radius: 3, 
+                      symbol: "circle", 
+                      lineWidth: 0
+                    }
+                  })
+                  //lociChange = axis.series.name;
+                  //setLociForActChange(axis.series.name);
+                  activelyClickedLoci.set(axis.series.name, false)
+                } 
+              })
+            });
+          } catch (error) {
+            console.log(error)
+          }
+          
         }
 
         // Set State for the Current Dataset

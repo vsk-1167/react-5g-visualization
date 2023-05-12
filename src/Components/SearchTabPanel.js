@@ -2,7 +2,7 @@
 import React, {useContext, 
     useEffect, 
     useRef,
-    useState,} from "react";
+    useState} from "react";
 import { useNavigate } from "react-router";
 import PropTypes from 'prop-types';
 import {Container,
@@ -25,57 +25,85 @@ import ClusterContext from "../Contexts/ClusterContext";
 
 
 function SearchTabPanel(props) {
-    // States
-    const [value, setValue] = React.useState(0);
-    const [geneTableData, setGeneTableData] = useState([]);
-    const [diffExpressionData, setDiffExpressionData] = useState([]);
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
-    let [lociForActChange, setLociForActChange] = useState([]);
-    var lociChange = "";
 
-    // Context-driven States
-    const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
-    const {currCluster, setCurrCluster} = useContext(ClusterContext);
-    const organism_id = currOrganismDataset[0]
-    const dataset_id = currOrganismDataset[1]
-    const curr_organism_name = organisms[organism_id].name;
-    const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
+  const navigate = useNavigate();
 
-    var url_prefix = '';
-  
-    // selects correct data for the specified [organism, dataset] pair
-    switch(String(currOrganismDataset)){  
-        default: 
-        url_prefix = ''
-        break;
-        case "0,0": // organism: M Buryatense, dataset: kmeans
-        url_prefix = 'https://blobcontainerdatasets.blob.core.windows.net/indclusterdetails/ordered_kmeans_ind_cluster_data_json/'
-        break;
-        case "0,1": // organism: M Buryatense, dataset: birch
-        url_prefix = 'https://blobcontainerdatasets.blob.core.windows.net/indclusterdetails/ordered_birch_ind_cluster_data_json/'
-        break;
+  // States
+  const [value, setValue] = React.useState(0);
+  const [searchTableData, setSearchTableData] = useState([]);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  let [lociForActChange, setLociForActChange] = useState([]);
+  var lociChange = "";
+
+  // Context-driven States
+  const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
+  const {currCluster, setCurrCluster} = useContext(ClusterContext);
+  const organism_id = currOrganismDataset[0]
+  const dataset_id = currOrganismDataset[1]
+  const curr_organism_name = organisms[organism_id].name;
+  const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
+
+
+  // Add folder location + file name to complete the Azure Blob Storage url 
+  var search_table_url = '';
+
+  // selects correct data for the specified [organism, dataset] pair
+  switch(String(currOrganismDataset[0])){  
+      default: 
+      search_table_url = ''
+      break;
+      case "0": // organism: M Buryatense
+      search_table_url = "https://blobcontainerdatasets.blob.core.windows.net/indclusterdetails/search_datasets/search_all_cluster_details.json"; 
+      break;
+  }
+
+  // On changes to the site's DOM --> changes to the states of the website
+  useEffect(() => {
+    // Collect the gene table summary data from Azure as json
+    fetch(search_table_url)
+    .then(result => result.json())
+    .then(searchTableData => setSearchTableData(searchTableData));
+  }, []);
+
+
+  // Assign cluster based on row click
+  const switchCluster = (clusterId) =>{
+    setCurrCluster(clusterId)
+  }
+
+  // Assign dataset based on row click given selected organism
+  const switchOrganismDataset = (organismDatasetList) => {
+    setCurrOrganismDataset(organismDatasetList)
+  }
+
+  const rowClicked = (event) => {
+    // Add event handlers
+    var organism_id = currOrganismDataset[0];
+    var dataset = event.data['clustering_dataset']
+    var dataset_id;
+    if(dataset === "kMeans"){
+      dataset_id = 0
+    } else if(dataset === "BIRCH") {
+      dataset_id = 1
     }
-    console.log(url_prefix);
+    var cluster_id = event.data['cluster_id']
 
-    // Add folder location + file name to complete the Azure Blob Storage url 
-    const diff_expression_url = url_prefix + String(currCluster) + "/" + String(currCluster) + "_diff_expression.json";
-    const gene_table_url = "https://blobcontainerdatasets.blob.core.windows.net/indclusterdetails/search_datasets/search_all_cluster_details.json"; 
-    console.log(gene_table_url);
+    console.log(event.data)
+    console.log(dataset)
+    console.log(dataset === "kMeans")
+    console.log(dataset === "BIRCH")
+    console.log("dataset: " + dataset + " with id " + dataset_id)
+    console.log("organismDatasetList: " + [organism_id, dataset_id])
 
-    // On changes to the site's DOM --> changes to the states of the website
-    useEffect(() => {
-      // Collect the differential expression data from Azure as json
-      fetch(diff_expression_url)
-      .then(result => result.json())
-      .then(diffExpressionData => setDiffExpressionData(diffExpressionData));
+    // Set State for the Current Dataset
+    switchOrganismDataset([organism_id, dataset_id])
+    switchCluster(cluster_id)
 
-      // Collect the gene table summary data from Azure as json
-      fetch(gene_table_url)
-      .then(result => result.json())
-      .then(geneTableData => setGeneTableData(geneTableData));
-    }, []);
+    // Navigate to Cluster Page
+    navigate("/cluster")
+  }
 
 
     // Outlines the column details for the gene data in a given cluster
@@ -84,13 +112,15 @@ function SearchTabPanel(props) {
           sortable: true, filter: true,resizable: true, floatingFilter: true,suppressMovable:true, width: 155},
 
       { headerName: "Gene", field: "gene", sort: 'desc',
-          sortable: true, filter: true, resizable: true, floatingFilter: true,suppressMovable:true, width: 155}, 
+          sortable: true, filter: true, resizable: true, floatingFilter: true,suppressMovable:true, width: 120}, 
       
       { headerName: "Product", field: "product", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
       { headerName: "Cluster ID", field: "cluster_id", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 140, wrapText: true,autoHeight: true,  cellStyle: { 'justify-content': "center" }},
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 120, wrapText: true,autoHeight: true,  cellStyle: { 'justify-content': "center" }},
       { headerName: "Clustering", field: "clustering_dataset", 
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 130},
+      { headerName: "Cluster Size", field: "cluster_size", 
           sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
       // { headerName: "start_coord", field: "start_coord", 
       //     sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
@@ -154,16 +184,14 @@ function SearchTabPanel(props) {
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"
                     >
-                    <AgGridReact  style={{ width: '100%', height: '40%;' }}
+                    <AgGridReact  style={{ width: '110%', height: '40%;' }}
                         columnDefs={table_columns}
-                        rowData={geneTableData}
+                        rowData={searchTableData}
                         domLayout='autoHeight'
                         enableCellTextSelection={true}
                         pagination={true}
-                        paginationPageSize={12}
-                        rowSelection={'multiple'}
-                        suppressClickEdit={true}
-                        suppressRowClickSelection={true}
+                        paginationPageSize={14}
+                        onRowDoubleClicked={event => rowClicked(event)}
                     />
             </div>
           </Container>
