@@ -28,18 +28,18 @@ import ClusterContext from "../Contexts/ClusterContext";
 const data = [1, 2, 1, 4, 3, 6] 
 
 const options = {
-  chart: {
-    type: 'spline'
-  },
-  title: {
-    text: 'My chart'
-  },
-  series: [
-    {
-      data: data
-    }
-  ]
-};
+    chart: {
+      type: 'scatter'
+    },
+    title: {
+      text: 'My chart'
+    },
+    series: [
+      {
+        data: data
+      }
+    ]
+  };
 
 function DatasetTabPanel(props) {
 
@@ -49,6 +49,8 @@ function DatasetTabPanel(props) {
     // States
     const [value, setValue] = React.useState(0);
     const [rowData, setRowData] = useState([]);
+    const [pcaData, setPcaData] = useState([]);
+    const [tsneData, setTsneData]= useState([]);
     const gridRef = useRef();
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -58,6 +60,10 @@ function DatasetTabPanel(props) {
     const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
     const {currCluster, setCurrCluster} = useContext(ClusterContext);
     var json_api_url = ''
+    var dimred_tsne_url = ''
+    var dimred_pca_url = ''
+    var pcaPlotTitle = ""
+    var tsnePlotTitle = ""
 
     // Temporary Hard-Coded Dataset Matching
     // [TASK: use Azure to directly match the currOrganism dataset to the respective dataset]
@@ -70,20 +76,37 @@ function DatasetTabPanel(props) {
         break;
         case "0,0":
         json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/kmeans_summary_stringlist.json'
+        dimred_tsne_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/tnse_kmeans.json'
+        dimred_pca_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/pca_kmeans.json'
+        pcaPlotTitle = "PCA Plot for kMeans Clustering"
+        tsnePlotTitle = "t-SNE Plot for kMeans Clustering"
         break;
         case "0,1":
         json_api_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/birch_summary_stringlist.json'
+        dimred_tsne_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/tnse_birch.json'
+        dimred_pca_url = 'https://blobcontainerdatasets.blob.core.windows.net/clustersummaries/pca_birch.json'
+        pcaPlotTitle = "PCA Plot for BIRCH Clustering"
+        tsnePlotTitle = "t-SNE Plot for BIRCH Clustering"
         break;
     }
 
     useEffect(() => {
         fetch(json_api_url) 
         .then(result => result.json())
-        .then(rowData => setRowData(rowData))
+        .then(rowData => setRowData(rowData));
+
+        fetch(dimred_tsne_url)
+        .then(result => result.json())
+        .then(tsneData => setTsneData(tsneData));
+
+        fetch(dimred_pca_url)
+        .then(result => result.json())
+        .then(pcaData => setPcaData(pcaData));
     }, []);
 
-    console.log(rowData);
-
+    // For local reference obtain JSON-encoded information in list format for lookup
+    //const pcaLociCoords = pcaData.map(i => Object.values(i))
+    
     const columns = [
     { headerName: "Cluster ID", field: "cluster_id", 
         sortable: true, filter: true, pinned: 'left',resizable: true, suppressMovable:true, width: 145},
@@ -111,6 +134,40 @@ function DatasetTabPanel(props) {
         navigate("/cluster")
     }
 
+    const pcaPlotOptions = {
+        chart: {
+          type: 'scatter',
+          zoomType: 'xy'
+        },
+        title: {
+          text: pcaPlotTitle
+        },
+        series: [
+          {
+            // data: pcaLociCoords.map((set, i) => ({
+            //     data: set
+            // }))
+          }
+        ]
+      };
+
+    const tsnePlotOptions = {
+    chart: {
+        type: 'scatter',
+        zoomType: 'xy'
+    },
+    title: {
+        text: tsnePlotTitle
+    },
+    series: [
+        {
+        // data: pcaLociCoords.map((set, i) => ({
+        //     data: set
+        // }))
+        }
+    ]
+    };
+
     return (
         <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -134,7 +191,9 @@ function DatasetTabPanel(props) {
         </TabPanel>
         <TabPanel value={value} index={1}>
             <Container className='tabbed-panel'>
-            <HighchartsReact highcharts={Highcharts} options={options}/>   
+            <HighchartsReact highcharts={Highcharts} options={pcaPlotOptions}/>   
+            <br/>
+            <HighchartsReact highcharts={Highcharts} options={tsnePlotOptions}/>   
             </Container>
         </TabPanel>
         </Box>

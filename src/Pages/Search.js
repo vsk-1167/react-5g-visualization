@@ -32,7 +32,7 @@ function Search() {
     return (
       <div className="App">
         <Grid container spacing ={1} columns={2} style= {gridstyle}>
-          <Grid item xs={6} md ={4}>
+          <Grid item xs={6} md ={3}>
             {/* LEFT PANEL*/}
             <SearchSplitPane className="split-pane-col">
               <SearchSplitPaneTop/>
@@ -40,7 +40,7 @@ function Search() {
             </SearchSplitPane>
           </Grid>
 
-          <Grid item xs={6} md={8} >
+          <Grid item xs={6} md={9} >
             {/*RIGHT PANEL*/}
             <Container className='tabbed-panel'>
               <SearchTabPanel/>

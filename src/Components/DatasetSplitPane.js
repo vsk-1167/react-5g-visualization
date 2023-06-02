@@ -12,6 +12,9 @@ import SplitPaneContext from "../Contexts/SplitPlaneContext";
 // Material UI Components
 import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
 
+//TODO: remember to store this externally (and not hard-code)
+const datasetParameters = [["k = 19", "threshold = 0.48,\nbranching factor = 0.50,\nk = 31"]]
+
 /**
  * 
  * 
@@ -71,6 +74,7 @@ export const DatasetSplitPaneTop = (props) => {
       <h1>{curr_organism_name}</h1>
       <h1 className="black-header">Dataset: {curr_dataset_name}</h1>
       <h3 className="black-header">Algorithm Parameters: </h3>
+      <p className="cluster-details">{datasetParameters[organism_id][dataset_id]}</p>
     </div>
   );
 };

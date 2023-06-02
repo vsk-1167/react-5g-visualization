@@ -122,52 +122,52 @@ function SearchTabPanel(props) {
           sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 130},
       { headerName: "Cluster Size", field: "cluster_size", 
           sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
-      // { headerName: "start_coord", field: "start_coord", 
-      //     sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
-      // { headerName: "end_coord", field: "end_coord", 
-      //     sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
-      // { headerName: "group", field: "group", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "start_coord", field: "start_coord", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
+      { headerName: "end_coord", field: "end_coord", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
+      { headerName: "group", field: "group", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       // { headerName: "translation", field: "translation", 
       //     sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "uMax", field: "uMax", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "MeOH", field: "MeOH", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "NoCu", field: "NoCu", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "lowCu", field: "lowCu", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "medCu", field: "medCu", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "highCu", field: "highCu", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "LanzaTech", field: "LanzaTech", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "lowCH4", field: "lowCH4", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "aa3_KO", field: "aa3_KO", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "NO3_lowO2_slow_growth", field: "NO3_lowO2_slow_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "highO2_slow_growth", field: "highO2_slow_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "lowO2_slow_growth", field: "lowO2_slow_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "lowO2_low_iron_fast_growth", field: "lowO2_low_iron_fast_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "WithLanthanum", field: "WithLanthanum", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "NoLanthanum", field: "NoLanthanum", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "crotonic_acid", field: "crotonic_acid", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "slow_growth", field: "slow_growth", 
-      //   sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "uMax", field: "uMax", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "MeOH", field: "MeOH", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "NoCu", field: "NoCu", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "lowCu", field: "lowCu", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "medCu", field: "medCu", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "highCu", field: "highCu", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "LanzaTech", field: "LanzaTech", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "lowCH4", field: "lowCH4", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "aa3_KO", field: "aa3_KO", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "NO3_lowO2_slow_growth", field: "NO3_lowO2_slow_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "highO2_slow_growth", field: "highO2_slow_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "lowO2_slow_growth", field: "lowO2_slow_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "lowO2_low_iron_fast_growth", field: "lowO2_low_iron_fast_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "WithLanthanum", field: "WithLanthanum", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "NoLanthanum", field: "NoLanthanum", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "crotonic_acid", field: "crotonic_acid", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+      { headerName: "slow_growth", field: "slow_growth", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       ];
   
     return (
@@ -184,7 +184,24 @@ function SearchTabPanel(props) {
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"
                     >
-                    <AgGridReact  style={{ width: '110%', height: '40%;' }}
+                    <AgGridReact  style={{ width: '110%', height: '50%;' }}
+                        columnDefs={table_columns}
+                        rowData={searchTableData}
+                        domLayout='autoHeight'
+                        enableCellTextSelection={true}
+                        pagination={true}
+                        paginationPageSize={14}
+                        onRowDoubleClicked={event => rowClicked(event)}
+                    />
+            </div>
+          </Container>
+        </TabPanel>
+
+        <TabPanel value={value} index={1}>
+          <Container className='table-viewer'>
+            <div className="ag-theme-alpine"
+                    >
+                    <AgGridReact  style={{ width: '110%', height: '50%;' }}
                         columnDefs={table_columns}
                         rowData={searchTableData}
                         domLayout='autoHeight'

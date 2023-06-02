@@ -79,6 +79,7 @@ ul a:hover {
   align-items: flex-start;
   height: 100vh;
   padding-top: 1%;
+  padding-bottom: 1%;
   overflow: scroll;
 }
 
@@ -101,3 +102,27 @@ h1 {
   justify-content: left; /* align horizontal */
   align-items: center;
 }
+
+.organism-bullets {
+  font-size: larger;
+  color: #e6ddd6 ;
+  text-decoration:underline;
+}
+
+ul ul li:before {
+  font-size: medium;
+  content: "\27A4 ";
+}
+
+ul ul li{
+  list-style: none;
+}
+
+ul ul {
+  padding-left: 0;
+}
+
+.cluster-details {
+  margin-left: 10%; 
+  white-space: pre-wrap;
+} 
