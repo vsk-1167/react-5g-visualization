@@ -54,7 +54,7 @@ export const HomeSplitPaneTop = (props) => {
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
 
   const navigate = useNavigate();
-  const datasetParameters = [[" k = 19", " threshold = 0.48, branching factor = 0.50, k = 31"]]
+  const datasetParameters = [[" k = 19", " threshold = 0.48, branching factor = 54, k = 31"]]
 
   useEffect(() => {
     if (!clientHeight) {
