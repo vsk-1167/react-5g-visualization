@@ -42,7 +42,17 @@ function HomeTabPanel(props) {
         </Box>
   
         <TabPanel value={value} index={0}>
-          Description of the software tool 
+        <br></br>
+        <strong>Motivation</strong>
+        <br></br>
+        <p  align="left">Methanotrophs are prokaryotes that naturally consume the potent greenhouse gas methane for energy. Through metabolic engineering at an industrial scale, these microorganisms hold potential to mitigate the contribution of methane emissions to global warming. In particular, Methylotuvimicrobium buryatense can sustain robust growth both in nature and experimental settings; it is a promising engineering candidate. To develop a robust metabolic engineering platform using M. buryatense, biologists require a deeper understanding of the genetic mechanisms by which it functions. 
+        </p>
+        <p align="left">This open-source software tool designed to interactively explore the transcriptome of M. buryatense. 
+        </p>
+        <br></br>
+        <strong>Development Process</strong>
+        <p align="left">By integrating bulk RNA-seq datasets collected from experiments over the past decade and applying an array of unsupervised machine learning clustering algorithms, we cluster genes by their expression profiles in differing growth conditions. These gene clusters are annotated with gene ontology (GO) terms using statistical enrichment analysis to assist in functional interpretation of the clusters and the genes that comprise them. To enhance domain-expert researchers’ ability to explore and drill-down into specific queries, I unify these cluster-specific analyses in a web-hosted tool using interactive data visualization techniques centered on a ReactJS frontend and Azure Cloud backend. With both exploratory and query-focused use cases, this software tool can support M. buryatense biologist workflows for predicting functions of hypothetical proteins, showcase new or confirming putative regulatory processes, and generate new experimental hypotheses from the presented transcriptomic trends.
+        </p>
         </TabPanel>
         <TabPanel value={value} index={1}>
           Instructions for how to use it 

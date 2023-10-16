@@ -39,7 +39,7 @@ function ClusterView() {
     return (
       <div className="App">
         <Grid container spacing ={1} columns={2} style= {gridstyle} >
-          <Grid item xs={6} md ={3} style={itemstyle}>
+          <Grid item xs={3} md ={3} style={itemstyle}>
             {/* LEFT PANEL --> labels for page*/}
             <ClusterSplitPane className="split-pane-col">
                 <ClusterSplitPaneTop />
@@ -47,7 +47,7 @@ function ClusterView() {
             </ClusterSplitPane>
           </Grid>
 
-          <Grid item xs={6} md={9} style={itemstyle}>
+          <Grid item xs={9} md={9} style={itemstyle}>
             {/*RIGHT PANEL --> data content*/}
             <Container className='tabbed-panel'>
               <ClusterTabPanel/>

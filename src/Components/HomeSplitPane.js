@@ -54,7 +54,8 @@ export const HomeSplitPaneTop = (props) => {
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
 
   const navigate = useNavigate();
-        
+  const datasetParameters = [[" k = 19", " threshold = 0.48, branching factor = 54, k = 31"]]
+
   useEffect(() => {
     if (!clientHeight) {
       setClientHeight((topRef.current.clientHeight));
@@ -84,11 +85,18 @@ export const HomeSplitPaneTop = (props) => {
                   <ul>
                     {el.datasets.map((data, j) => {
                       return (
-                        <li key={j}>
-                          <a href="#" onClick={() => switchOrganismDataset(i, j)}>
-                            {data}
-                          </a>
-                        </li>
+                        <div>
+                          <li key={j}>
+                            <a class="organism-bullets" href="#" onClick={() => switchOrganismDataset(i, j)}>
+                              {data}
+                            </a>
+                          </li>
+                          <ul>
+                            <li>
+                              {datasetParameters[i][j]}
+                            </li>
+                          </ul>
+                        </div>
                       );
                     })}
                   </ul>
@@ -147,7 +155,7 @@ export const HomeSplitPaneBottom = (props) => {
           vertical: 'top',
           horizontal: 'center',
         })}>
-              Add New Organism/Dataset
+              Add New Clustering Dataset
               {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>
           </Grid>

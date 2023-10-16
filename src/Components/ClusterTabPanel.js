@@ -253,15 +253,15 @@ function ClusterTabPanel(props) {
           checkboxSelection: true,
           showDisabledCheckboxes: true,},
       { headerName: "gene", field: "gene", 
-          sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 100}, 
+          sortable: true, filter: true, pinned: 'left',resizable: true, floatingFilter: true,suppressMovable:true, width: 110}, 
       { headerName: "product", field: "product", 
           sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
       { headerName: "length", field: "length", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 100},
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 100},
       { headerName: "start_coord", field: "start_coord", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
       { headerName: "end_coord", field: "end_coord", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
       { headerName: "group", field: "group", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       // { headerName: "GO Terms", field: "go_terms", 
@@ -269,43 +269,43 @@ function ClusterTabPanel(props) {
       // { headerName: "translation", field: "translation", 
       //     sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "uMax", field: "uMax", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "MeOH", field: "MeOH", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "NoCu", field: "NoCu", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "lowCu", field: "lowCu", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "medCu", field: "medCu", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "highCu", field: "highCu", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "LanzaTech", field: "LanzaTech", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "lowCH4", field: "lowCH4", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "aa3_KO", field: "aa3_KO", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "NO3_lowO2_slow_growth", field: "NO3_lowO2_slow_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "highO2_slow_growth", field: "highO2_slow_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "lowO2_slow_growth", field: "lowO2_slow_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "lowO2_fast_growth", field: "lowO2_fast_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "lowO2_low_iron_fast_growth", field: "lowO2_low_iron_fast_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "WithLanthanum", field: "WithLanthanum", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "NoLanthanum", field: "NoLanthanum", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "crotonic_acid", field: "crotonic_acid", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "slow_growth", field: "slow_growth", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       ];
   
     const chartComponentRef = useRef(null); // access the highchart object in DOM between renders
@@ -319,55 +319,65 @@ function ClusterTabPanel(props) {
         var selLocusTag = "Loci: " + event.data['locus_tag']
 
         if(selected){
-          chartComponentRef.current.chart.series.forEach(series => {
-            series.data.forEach(axis => {
-              if(selLocusTag === axis.series.name ){
-                axis.series.update({
-                  lineWidth: 7,
-                  zIndex: 1000,
-                  shadow:{
-                    color: 'black',
-                    width: 5,//5000/zIndex.drawer,
-                    opacity: .8,
-                    offsetX: 0,
-                    offsetY: 0,
-                  },
-                  marker:{
-                    radius: 8, 
-                    symbol: "square",
-                    borderColor: "black",
-                    lineColor: "black", 
-                    lineWidth: 1
-                  },
-                  hover: true
-                })
-                console.log(selLocusTag)
-                //lociChange = axis.series.name;
-                //setLociForActChange(axis.series.name);
-                activelyClickedLoci.set(selLocusTag, true)
-              } 
-            })
-          });
+          try {
+            chartComponentRef.current.chart.series.forEach(series => {
+              series.data.forEach(axis => {
+                if(selLocusTag === axis.series.name ){
+                  axis.series.update({
+                    lineWidth: 7,
+                    zIndex: 1000,
+                    shadow:{
+                      color: 'black',
+                      width: 5,//5000/zIndex.drawer,
+                      opacity: .8,
+                      offsetX: 0,
+                      offsetY: 0,
+                    },
+                    marker:{
+                      radius: 8, 
+                      symbol: "square",
+                      borderColor: "black",
+                      lineColor: "black", 
+                      lineWidth: 1
+                    },
+                    hover: true
+                  })
+                  console.log(selLocusTag)
+                  //lociChange = axis.series.name;
+                  //setLociForActChange(axis.series.name);
+                  activelyClickedLoci.set(selLocusTag, true)
+                } 
+              })
+            });
+          } catch (error) {
+            console.log(error)
+          }
+          
         } else{
-          chartComponentRef.current.chart.series.forEach(series => {
-            series.data.forEach(axis => {
-              if(selLocusTag === axis.series.name ){
-                axis.series.update({
-                  lineWidth: 2, 
-                  shadow: false,
-                  hover: true,
-                  marker:{
-                    radius: 3, 
-                    symbol: "circle", 
-                    lineWidth: 0
-                  }
-                })
-                //lociChange = axis.series.name;
-                //setLociForActChange(axis.series.name);
-                activelyClickedLoci.set(axis.series.name, false)
-              } 
-            })
-          });
+          try {
+            chartComponentRef.current.chart.series.forEach(series => {
+              series.data.forEach(axis => {
+                if(selLocusTag === axis.series.name ){
+                  axis.series.update({
+                    lineWidth: 2, 
+                    shadow: false,
+                    hover: true,
+                    marker:{
+                      radius: 3, 
+                      symbol: "circle", 
+                      lineWidth: 0
+                    }
+                  })
+                  //lociChange = axis.series.name;
+                  //setLociForActChange(axis.series.name);
+                  activelyClickedLoci.set(axis.series.name, false)
+                } 
+              })
+            });
+          } catch (error) {
+            console.log(error)
+          }
+          
         }
 
         // Set State for the Current Dataset
