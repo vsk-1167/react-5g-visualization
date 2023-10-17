@@ -12,7 +12,9 @@ import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
 // Material UI Components
-import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
+import {Snackbar, Button, Grid, IconButton, 
+        Box, Card, CardActions, CardContent, 
+        Typography, Container} from '@material-ui/core';
 
 // Components
 /**
@@ -74,7 +76,7 @@ export const HomeSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
-      <h1>Select Clustering Dataset:</h1>
+      <h1>Select Dataset:</h1>
       <ol>
         {organisms.map((el, i) => {
               return (
@@ -82,28 +84,30 @@ export const HomeSplitPaneTop = (props) => {
                   <h3>
                     {el.name}
                   </h3>
-                  <ul>
-                    {el.datasets.map((data, j) => {
+                  <Container>
+                  {el.datasets.map((data, j) => {
                       return (
-                        <div>
-                          <li key={j}>
-                            <a class="organism-bullets" href="#" onClick={() => switchOrganismDataset(i, j)}>
-                              {data}
-                            </a>
-                          </li>
-                          <ul>
-                            <li>
-                              {datasetParameters[i][j]}
-                            </li>
-                          </ul>
-                        </div>
+                        <Card style={{ minWidth: 5, padding: 3, marginBottom: 15}}>
+                          <CardContent>
+                            <Typography sx={{ fontSize: 15 }} color="text.secondary" gutterBottom>
+                              <strong>Clustering Algorithm: </strong>{data}
+                            </Typography>
+                            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                              <strong>Parameters: </strong>{datasetParameters[i][j]}
+                            </Typography>
+                          </CardContent>
+                          <CardActions style={{justifyContent: 'right'}}>
+                            <Button size="small" variant="contained" href="#" onClick={() => switchOrganismDataset(i, j)}>Click To Explore</Button>
+                          </CardActions>
+                        </Card>
                       );
                     })}
-                  </ul>
+                  </Container>
                 </li>
               );
         })}
       </ol>
+      
     </div>
   );
 };

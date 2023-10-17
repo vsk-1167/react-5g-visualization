@@ -11,6 +11,13 @@ import {Container,
     Tab, 
     Typography} from "@material-ui/core";
 import TabPanel from "./TabPanel";
+import ReactMarkdown from 'react-markdown'
+
+// Images
+import about_logo from "../Assets/about_logo.png"
+
+// MD Files
+import about_md from "../Documentation/About.md"
 
 // Plotting
 import Highcharts from 'highcharts';
@@ -37,11 +44,30 @@ function HomeTabPanel(props) {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="About" {...a11yProps(0)} />
-            <Tab label="Help" {...a11yProps(1)} />
+            <Tab label="Documentation" {...a11yProps(1)} />
+            <Tab label="Feedback" {...a11yProps(2)} />
           </Tabs>
         </Box>
   
         <TabPanel value={value} index={0}>
+          
+          
+
+        {
+        <ReactMarkdown>
+          ![LOGO](../Assets/about_logo.png)
+          #What is BRACE?
+
+          #Why was BRACE developed?
+
+          #Getting Started
+
+          #Meet the team
+        </ReactMarkdown>
+        /* <br></br>
+        <container style={{alignContent: "left"}}>
+          <img src={about_logo} alt="logo" style={{ height: 150}}/>
+        </container>
         <br></br>
         <strong>Motivation</strong>
         <br></br>
@@ -52,7 +78,7 @@ function HomeTabPanel(props) {
         <br></br>
         <strong>Development Process</strong>
         <p align="left">By integrating bulk RNA-seq datasets collected from experiments over the past decade and applying an array of unsupervised machine learning clustering algorithms, we cluster genes by their expression profiles in differing growth conditions. These gene clusters are annotated with gene ontology (GO) terms using statistical enrichment analysis to assist in functional interpretation of the clusters and the genes that comprise them. To enhance domain-expert researchers’ ability to explore and drill-down into specific queries, I unify these cluster-specific analyses in a web-hosted tool using interactive data visualization techniques centered on a ReactJS frontend and Azure Cloud backend. With both exploratory and query-focused use cases, this software tool can support M. buryatense biologist workflows for predicting functions of hypothetical proteins, showcase new or confirming putative regulatory processes, and generate new experimental hypotheses from the presented transcriptomic trends.
-        </p>
+        </p> */}
         </TabPanel>
         <TabPanel value={value} index={1}>
           Instructions for how to use it 
