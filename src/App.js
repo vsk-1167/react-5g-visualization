@@ -3,7 +3,8 @@ import './App.css';
 import { useState, React} from "react";
 
 // Images
-import nav_bar_logo from "./Assets/nav_bar_logo.png"
+import nav_bar_logo from "./Assets/nav_bar_logo_dark.png"
+
 
 // Material UI Components
 import { Button, AppBar, Toolbar, Typography} from '@material-ui/core';
@@ -50,15 +51,16 @@ function App() {
       <Router>
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
-            <AppBar position="static" >
+            <AppBar position="static"
+                    style={{backgroundColor: '#000000'}}>
               <Toolbar>
                 
                 <Button color="inherit">
-                  <NavLink to="/react-5g-visualization/home" style={{color: 'black', fontSize: 17}}> Home </NavLink>
+                  <NavLink to="/react-5g-visualization/home" style={{color: 'white', fontSize: 17}}> Home </NavLink>
                 </Button>
 
                 <Button color="inherit">
-                  <NavLink to="/react-5g-visualization/search" style={{color: 'black', fontSize: 17}}> Search </NavLink>
+                  <NavLink to="/react-5g-visualization/search" style={{color: 'white', fontSize: 17}}> Search </NavLink>
                 </Button>
                 <div style={{flex: 1}}></div>
                 <img src={nav_bar_logo} alt="logo" style={{ height: 65,}}/>

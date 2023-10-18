@@ -140,15 +140,16 @@ function ClusterTabPanel(props) {
     const getPCoordsOptions = () => ({
       chart: {
         type: 'line',
-        width: 1200,
-        height: 800,
+        width: 940,
+        height: (9 / 16 * 100) + '%',
         parallelCoordinates: true,
         parallelAxes: {
           lineWidth: 2,
         },
         zoomType: 'xy',
         panning: true,
-        panKey: 'shift'
+        panKey: 'shift', 
+        scrollbar: { enabled: false },
       },
       title: {
         text: pCoordPlotTitle
@@ -225,7 +226,7 @@ function ClusterTabPanel(props) {
           },
           click: function () {
             console.log("clicked on " + this.name);
-            GridApi.getRowNode()
+            //GridApi.getRowNode()
           }
         }
       }))
@@ -408,7 +409,7 @@ function ClusterTabPanel(props) {
                         domLayout='autoHeight'
                         enableCellTextSelection={true}
                         pagination={true}
-                        paginationPageSize={10}
+                        paginationPageSize={5}
                         rowSelection={'multiple'}
                         onRowSelected={event => rowSelected(event)}
                         suppressClickEdit={true}

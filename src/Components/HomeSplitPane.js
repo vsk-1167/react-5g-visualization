@@ -97,7 +97,13 @@ export const HomeSplitPaneTop = (props) => {
                             </Typography>
                           </CardContent>
                           <CardActions style={{justifyContent: 'right'}}>
-                            <Button size="small" variant="contained" href="#" onClick={() => switchOrganismDataset(i, j)}>Click To Explore</Button>
+                            <Button size="small" 
+                                    variant="contained" 
+                                    href="#" 
+                                    onClick={() => switchOrganismDataset(i, j)}
+                                    style={{backgroundColor: "#DADCFF"}}>
+                                Click To Explore Dataset
+                            </Button>
                           </CardActions>
                         </Card>
                       );
@@ -156,18 +162,29 @@ export const HomeSplitPaneBottom = (props) => {
       <Grid container spacing={2} direction="column">
           <Grid item>
             <Button variant="contained" component="label" size="large" fullWidth="true" paddingBottom={25}         onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'center',
-        })}>
+                                                                                                    vertical: 'top',
+                                                                                                    horizontal: 'center',
+                                                                                                  })}>
               Add New Clustering Dataset
               {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>
           </Grid>
+
           <Grid item>
             <Button variant="contained" component="label" size="large" fullWidth="true" onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'center',
-        })}>
+                                                                                                    vertical: 'top',
+                                                                                                    horizontal: 'center',
+                                                                                                  })}>
+              Add New Organism
+              {/* <input hidden accept="image/*" multiple type="file" /> */}
+            </Button>
+          </Grid>
+          
+          <Grid item>
+            <Button variant="contained" component="label" size="large" fullWidth="true" onClick={handleClick({
+                                                                                                    vertical: 'top',
+                                                                                                    horizontal: 'center',
+                                                                                                  })}>
               Download All Files
               {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>
