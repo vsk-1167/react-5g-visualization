@@ -79,7 +79,7 @@ export const SearchSplitPaneTop = (props) => {
               return (
                 <li key={i}>
                   <h3>
-                    {<a href="#" onClick={() => switchOrganismDataset(i, 0)}>
+                    {<a href="#" >
                             {el.name}
                           </a>}
                   </h3>

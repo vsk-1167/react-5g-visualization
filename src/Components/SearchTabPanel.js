@@ -105,15 +105,36 @@ function SearchTabPanel(props) {
     navigate("/cluster")
   }
 
-
-    // Outlines the column details for the gene data in a given cluster
-    const table_columns = [
+    // SEARCH BY EXPRESSION PROFILE
+    // Outlines the column details for the gene data in a given cluster 
+    const table_columns_gene = [
       { headerName: "Locus", field: "locus_tag", 
           sortable: true, filter: true,resizable: true, floatingFilter: true,suppressMovable:true, width: 155},
-
       { headerName: "Gene", field: "gene", sort: 'desc',
           sortable: true, filter: true, resizable: true, floatingFilter: true,suppressMovable:true, width: 120}, 
-      
+      { headerName: "Group", field: "group", 
+          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 120},
+      { headerName: "Product", field: "product", 
+        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
+      { headerName: "Cluster ID", field: "cluster_id", 
+        sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 120, wrapText: true,autoHeight: true,  cellStyle: { 'justify-content': "center" }},
+      { headerName: "Clustering", field: "clustering_dataset", 
+          sortable: true, resizable: true, floatingFilter: true, filter: true, suppressMovable:true, width: 130},
+      { headerName: "Cluster Size", field: "cluster_size", 
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
+      { headerName: "start_coord", field: "start_coord", 
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
+      { headerName: "end_coord", field: "end_coord", 
+          sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150}
+    ]
+
+    // SEARCH BY EXPRESSION PROFILE
+    // Outlines the column details for the gene data in a given cluster 
+    const table_columns_exp_profile = [
+      { headerName: "Locus", field: "locus_tag", 
+          sortable: true, filter: true,resizable: true, floatingFilter: true,suppressMovable:true, width: 155},
+      { headerName: "Gene", field: "gene", sort: 'desc',
+          sortable: true, filter: true, resizable: true, floatingFilter: true,suppressMovable:true, width: 120}, 
       { headerName: "Product", field: "product", 
         sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 400, wrapText: true, autoHeight: true},
       { headerName: "Cluster ID", field: "cluster_id", 
@@ -122,14 +143,6 @@ function SearchTabPanel(props) {
           sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 130},
       { headerName: "Cluster Size", field: "cluster_size", 
           sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
-      { headerName: "start_coord", field: "start_coord", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
-      { headerName: "end_coord", field: "end_coord", 
-          sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 150},
-      { headerName: "group", field: "group", 
-        sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      // { headerName: "translation", field: "translation", 
-      //     sortable: true, filter: true, resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "uMax", field: "uMax", 
         sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "MeOH", field: "MeOH", 
@@ -168,7 +181,7 @@ function SearchTabPanel(props) {
         sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
       { headerName: "slow_growth", field: "slow_growth", 
         sortable: true, filter: "agNumberColumnFilter", resizable: true, floatingFilter: true, suppressMovable:true, width: 190},
-      ];
+    ];
   
     return (
       <Box sx={{ width: '100%' }}>
@@ -184,13 +197,13 @@ function SearchTabPanel(props) {
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"
                     >
-                    <AgGridReact  style={{ width: '110%', height: '50%;' }}
-                        columnDefs={table_columns}
+                    <AgGridReact  style={{ width: '110%', height: '50%;'}}
+                        columnDefs={table_columns_gene}
                         rowData={searchTableData}
                         domLayout='autoHeight'
                         enableCellTextSelection={true}
                         pagination={true}
-                        paginationPageSize={14}
+                        paginationPageSize={6}
                         onRowDoubleClicked={event => rowClicked(event)}
                     />
             </div>
@@ -202,12 +215,12 @@ function SearchTabPanel(props) {
             <div className="ag-theme-alpine"
                     >
                     <AgGridReact  style={{ width: '110%', height: '50%;' }}
-                        columnDefs={table_columns}
+                        columnDefs={table_columns_exp_profile}
                         rowData={searchTableData}
                         domLayout='autoHeight'
                         enableCellTextSelection={true}
                         pagination={true}
-                        paginationPageSize={14}
+                        paginationPageSize={6}
                         onRowDoubleClicked={event => rowClicked(event)}
                     />
             </div>
