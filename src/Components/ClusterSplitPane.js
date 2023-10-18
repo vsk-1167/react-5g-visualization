@@ -3,8 +3,9 @@ import React, {
     useContext,
     useEffect,
     useRef,
-    useState,
+    useState
   } from "react";
+import { useNavigate } from "react-router";
 
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
@@ -71,9 +72,10 @@ export const ClusterSplitPaneTop = (props) => {
     
   return (
     <div {...props} className="split-pane-top" ref={topRef}>
+      
       <h1>{curr_organism_name}</h1>
-      <h1 className= "black-header">Dataset: {curr_dataset_name}</h1>
-      <h1 className= "black-header">Cluster: {curr_cluster}</h1>
+      <h2 className= "black-header">Dataset: {curr_dataset_name}</h2>
+      <h2 className= "black-header">Cluster: {curr_cluster}</h2>
     </div>
   );
 };
@@ -86,6 +88,7 @@ export const ClusterSplitPaneTop = (props) => {
 export const ClusterSplitPaneBottom = (props) => {
 
   const topRef = createRef();
+  const navigate = useNavigate();
 
   // States from context
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
@@ -114,6 +117,10 @@ export const ClusterSplitPaneBottom = (props) => {
     setErrorAlertState({ ...errorAlertState, open: false });
   };
 
+  const returnToDataset = (newState) => () => {
+    navigate("/dataset")
+  };
+
   const action = (
     <React.Fragment>
       <IconButton
@@ -131,15 +138,36 @@ export const ClusterSplitPaneBottom = (props) => {
     <div {...props} className="split-pane-bottom">
 
       <Grid container spacing={2} direction="column">
-          <Grid item>
-            <Button variant="contained" component="label" size="large" fullWidth="true" paddingBottom={25}         onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'center',
-        })}>
-              Download Cluster Summary File
-              {/* <input hidden accept="image/*" multiple type="file" /> */}
-            </Button>
-          </Grid>
+        <Grid item>
+          <Button variant="contained" 
+                  component="label" 
+                  size="large" 
+                  fullWidth="true" 
+                  paddingBottom={25} 
+                  onClick={returnToDataset({
+                              vertical: 'top',
+                              horizontal: 'center',
+                            })}
+                  style={{backgroundColor: "#DADCFF"}}>
+            Return To Dataset
+            {/* <input hidden accept="image/*" multiple type="file" /> */}
+          </Button>
+        </Grid>
+        
+        <Grid item>
+          <Button variant="contained" 
+                  component="label" 
+                  size="large" 
+                  fullWidth="true" 
+                  paddingBottom={25} 
+                  onClick={handleClick({
+                            vertical: 'top',
+                            horizontal: 'center',
+                          })}>
+            Download Cluster Summary File
+            {/* <input hidden accept="image/*" multiple type="file" /> */}
+          </Button>
+        </Grid>
       </Grid>
 
       <Snackbar

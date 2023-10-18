@@ -5,12 +5,13 @@ import React, {
     useRef,
     useState,
   } from "react";
+import { useNavigate } from "react-router";
 
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 
 // Material UI Components
-import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
+import {Snackbar, Button, Grid, IconButton, styled} from '@material-ui/core';
 
 //TODO: remember to store this externally (and not hard-code)
 const datasetParameters = [["k = 19", "threshold = 0.48,\nbranching factor = 0.50,\nk = 31"]]
@@ -87,6 +88,7 @@ export const DatasetSplitPaneTop = (props) => {
 export const DatasetSplitPaneBottom = (props) => {
 
   const topRef = createRef();
+  const navigate = useNavigate();
 
   // States from context
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
@@ -115,6 +117,10 @@ export const DatasetSplitPaneBottom = (props) => {
     setErrorAlertState({ ...errorAlertState, open: false });
   };
 
+  const returnHome = (newState) => () => {
+    navigate("/react-5g-visualization/home")
+  };
+
   const action = (
     <React.Fragment>
       <IconButton
@@ -133,10 +139,29 @@ export const DatasetSplitPaneBottom = (props) => {
 
       <Grid container spacing={2} direction="column">
           <Grid item>
-            <Button variant="contained" component="label" size="large" fullWidth="true" paddingBottom={25}         onClick={handleClick({
-          vertical: 'top',
-          horizontal: 'center',
-        })}>
+            <Button variant="contained" 
+                    component="label" size="large" 
+                    fullWidth="true" 
+                    paddingBottom={25}  
+                    onClick={returnHome({
+                      vertical: 'top',
+                      horizontal: 'center',
+                    })}
+                    style={{backgroundColor: "#DADCFF"}}>
+              Return Home
+              {/* <input hidden accept="image/*" multiple type="file" /> */}
+            </Button>
+          </Grid>
+          <Grid item>
+            <Button variant="contained" 
+                    component="label" 
+                    size="large" 
+                    fullWidth="true" 
+                    paddingBottom={25}  
+                    onClick={handleClick({
+                      vertical: 'top',
+                      horizontal: 'center',
+                    })}>
               Download Cluster Summary File
               {/* <input hidden accept="image/*" multiple type="file" /> */}
             </Button>

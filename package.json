@@ -1,5 +1,5 @@
 {
-  "homepage": "https://vsk-1167.github.io/react-5g-visualization/",
+  "homepage": "https://vsk-1167.github.io/react-5g-visualization/home",
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
@@ -15,6 +15,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-highcharts": "^16.1.0",
+    "react-markdown": "^9.0.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-split-pane": "^0.1.92",

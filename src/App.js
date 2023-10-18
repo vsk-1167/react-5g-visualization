@@ -2,6 +2,10 @@ import logo from './logo.svg';
 import './App.css';
 import { useState, React} from "react";
 
+// Images
+import nav_bar_logo from "./Assets/nav_bar_logo_dark.png"
+
+
 // Material UI Components
 import { Button, AppBar, Toolbar, Typography} from '@material-ui/core';
 
@@ -47,21 +51,26 @@ function App() {
       <Router>
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
-            <AppBar position="static">
+            <AppBar position="static"
+                    style={{backgroundColor: '#000000'}}>
               <Toolbar>
+                
                 <Button color="inherit">
-                  <NavLink to="/home" style={{color: 'white'}}> Home </NavLink>
+                  <NavLink to="/react-5g-visualization/home" style={{color: 'white', fontSize: 17}}> Home </NavLink>
                 </Button>
 
                 <Button color="inherit">
-                  <NavLink to="/search" style={{color: 'white'}}> Search </NavLink>
+                  <NavLink to="/react-5g-visualization/search" style={{color: 'white', fontSize: 17}}> Search </NavLink>
                 </Button>
+                <div style={{flex: 1}}></div>
+                <img src={nav_bar_logo} alt="logo" style={{ height: 65,}}/>
+                
               </Toolbar>
             </AppBar>
 
             <Routes>
-              <Route path="/home" element={<Home/>}/>
-              <Route path="/search" element={<Search/>} />
+              <Route path="/react-5g-visualization/home" element={<Home/>}/>
+              <Route path="/react-5g-visualization/search" element={<Search/>} />
               <Route path="*" element={<Navigate replace to="/error" />} />
               {/* below are data-driven visualization pages */}
               {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
