@@ -1,9 +1,7 @@
 {
-  // "homepage": "https://vsk-1167.github.io/react-5g-visualization",
   "homepage": "",
   "name": "my-app",
   "version": "0.1.0",
-  //"private": true,
   "private": false,
   "dependencies": {
     "@material-ui/core": "^4.12.4",
