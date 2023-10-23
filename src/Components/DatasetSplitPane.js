@@ -14,7 +14,7 @@ import SplitPaneContext from "../Contexts/SplitPlaneContext";
 import {Snackbar, Button, Grid, IconButton, styled} from '@material-ui/core';
 
 //TODO: remember to store this externally (and not hard-code)
-const datasetParameters = [["k = 19", "threshold = 0.48,\nbranching factor = 0.50,\nk = 31"]]
+const datasetParameters = [["k = 19", "threshold = 0.48,\nbranching factor = 54,\nk = 31"]]
 
 /**
  * 
