@@ -177,7 +177,11 @@ function DatasetTabPanel(props) {
             <Tab label="Visualizations" {...a11yProps(1)} />
             </Tabs>
         </Box>
+        
         <TabPanel value={value} index={0}>
+            <div align = "left" style={{fontSize: 15, marginTop: 15, marginLeft: 15, marginBottom: -20}}>
+                <p>ⓘ Double click on row to navigate to the respective Cluster View page</p>
+            </div>
             <Container className='table-viewer'>
             <div className="ag-theme-alpine">
                     <AgGridReact
@@ -186,6 +190,7 @@ function DatasetTabPanel(props) {
                         domLayout='autoHeight'
                         onRowDoubleClicked={event => rowClicked(event)}
                         enableCellTextSelection={true}
+                        alwaysShowHorizontalScroll={true}
                     />
                 </div>
             </Container>

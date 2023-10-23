@@ -306,6 +306,7 @@ function SearchTabPanel(props) {
                     isExternalFilterPresent={searchGeneFilter_HasFilter}
                     doesExternalFilterPass={searchGeneFilter_ExternalPass}
                     animateRows={true}
+                    alwaysShowHorizontalScroll={true}
                   />
           </div>
         </Container>
@@ -356,6 +357,7 @@ function SearchTabPanel(props) {
                     pagination={true}
                     paginationPageSize={10}
                     onRowDoubleClicked={event => rowClicked(event)}
+                    alwaysShowHorizontalScroll={true}
                   />
           </div>
         </Container>
