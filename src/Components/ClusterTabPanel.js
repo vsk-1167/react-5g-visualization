@@ -416,6 +416,7 @@ function ClusterTabPanel(props) {
                         onRowSelected={event => rowSelected(event)}
                         suppressClickEdit={true}
                         suppressRowClickSelection={true}
+                        alwaysShowHorizontalScroll={true}
                     />
             </div>
           </Container>
