@@ -14,8 +14,8 @@ import {Container,
 import TabPanel from "./TabPanel";
 
 // Plotting
-import Highcharts from 'highcharts';
-import HighchartsReact from "highcharts-react-official";
+//import Highcharts from 'highcharts';
+//import HighchartsReact from "highcharts-react-official";
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
@@ -179,8 +179,8 @@ function DatasetTabPanel(props) {
         </Box>
         
         <TabPanel value={value} index={0}>
-            <div align = "left" style={{fontSize: 15, marginTop: 15, marginLeft: 15, marginBottom: -20}}>
-                <p>ⓘ Double click on row to navigate to the respective Cluster View page</p>
+            <div align = "left" style={{fontSize: 15, marginTop: 15, marginLeft: 25, marginBottom: -20}}>
+                <p>ℹ️ <em>Double click on any cluster row below to navigate to its respective Cluster View page</em></p>
             </div>
             <Container className='table-viewer'>
             <div className="ag-theme-alpine">

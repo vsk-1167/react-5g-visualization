@@ -14,7 +14,7 @@ import {Container,
 import TabPanel from "./TabPanel";
 
 // Data from Azure
-import { BlobServiceClient } from "@azure/storage-blob";
+// import { BlobServiceClient } from "@azure/storage-blob";
 
 // Contexts
 import OrganismContext from "../Contexts/OrganismContext";
@@ -27,8 +27,7 @@ import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import zIndex from "@material-ui/core/styles/zIndex";
-import { GridApi } from "ag-grid-community";
-import { Button } from "bootstrap";
+// import { GridApi } from "ag-grid-community";
 require("highcharts/modules/exporting")(Highcharts);
 
 // Data
@@ -402,9 +401,9 @@ function ClusterTabPanel(props) {
         </Box>
   
         <TabPanel value={value} index={0}>
-          <div align = "left" style={{fontSize: 15, marginTop: 15, marginLeft: 15, marginBottom: -20}}>
-                <p>ⓘ Click on column header in data table below to change sorting of rows 
-                  (ascending or descending) based on the column's value</p>
+          <div align = "left" style={{fontSize: 15, marginTop: 15, marginLeft: 25, marginBottom: -20}}>
+                <p>ℹ️ <em>click on column header in data table below to change sorting of rows 
+                  (ascending or descending) based on the column's value</em></p>
           </div>
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"

@@ -3,7 +3,6 @@ import React, {useContext,
     useEffect, 
     useRef,
     useState,} from "react";
-import { useNavigate } from "react-router";
 import PropTypes from 'prop-types';
 import {Container,
     Box, 
@@ -12,7 +11,7 @@ import {Container,
     Typography, 
     Card} from "@material-ui/core";
 import TabPanel from "./TabPanel";
-import ReactMarkdown from 'react-markdown'
+//import ReactMarkdown from 'react-markdown'
 
 // Images
 import about_logo from "../Assets/about_logo.png"

@@ -89,6 +89,9 @@ export const ClusterSplitPaneTop = (props) => {
       {showSearchResult && <Card style={{fontSize: 15, marginRight: 15, marginLeft: 15}}>
                             <Container>
                               <p><strong>Last Searched Gene Loci:</strong> {search_gene_loci}</p>
+                              <div style={{fontSize: 10}}>
+                                <p>ℹ️ <em>copy/paste into "locus_tag" column search bar</em></p>
+                              </div>
                             </Container>
                           </Card>
       }

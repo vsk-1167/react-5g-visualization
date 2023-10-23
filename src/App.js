@@ -48,7 +48,7 @@ function App() {
   const [currSearchGeneResult, setCurrSearchGeneResult] = useState(["", []])  // format: ["loci", [<currOrganismID>, <currDatasetID>, <currCluster>]]
 
   return (
-      <Router basename='react-5g-visualization'>
+      <Router>
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
             <SearchNavContext.Provider value = {{currSearchGeneResult, setCurrSearchGeneResult}}>
@@ -75,15 +75,15 @@ function App() {
                 {/* below are data-driven visualization pages */}
                 {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
                 <Route path="/dataset" element={<DatasetView/>}/>
+                <Route path="/dataset#" element={<DatasetView/>}/>
                 <Route path="/cluster" element={<ClusterView/>}/>
                 <Route path="/error" element={<ErrorPage/>}/>
                 {/* <Route path="/react-5g-visualization/gene/:gene_id" element={<GeneView/>} /> */}
-                <Route path="*" element={<Navigate replace to="/error" />} />
+                {/* <Route path="*" element={<Navigate replace to="/home" />} /> */}
               </Routes>
             </SearchNavContext.Provider>
           </ClusterContext.Provider>
         </OrganismContext.Provider>
-        
       </Router>
     );
   }
