@@ -16,17 +16,12 @@ import {Container,
 import { useNavigate } from "react-router";
 
 // Graphs and Plotting
-import Highcharts from 'highcharts';
-import HighchartsReact from 'highcharts-react-official';
-import HighchartsExporting from 'highcharts/modules/exporting';
-import HighchartsAccessibility from 'highcharts/modules/accessibility';
-import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 
 // Context
-import OrganismContext from "../Contexts/OrganismContext";
-import ClusterContext from "../Contexts/ClusterContext";
+// import OrganismContext from "../Contexts/OrganismContext";
+// import ClusterContext from "../Contexts/ClusterContext";
 
 
 

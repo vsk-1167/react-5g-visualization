@@ -14,7 +14,7 @@ import {Container,
 import TabPanel from "./TabPanel";
 
 // Data from Azure
-import { BlobServiceClient } from "@azure/storage-blob";
+// import { BlobServiceClient } from "@azure/storage-blob";
 
 // Contexts
 import OrganismContext from "../Contexts/OrganismContext";
@@ -27,7 +27,7 @@ import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import zIndex from "@material-ui/core/styles/zIndex";
-import { GridApi } from "ag-grid-community";
+// import { GridApi } from "ag-grid-community";
 require("highcharts/modules/exporting")(Highcharts);
 
 // Data

@@ -27,8 +27,6 @@ import {Container,
 import TabPanel from "./TabPanel";
 
 // Plotting
-import Highcharts from 'highcharts';
-import HighchartsReact from "highcharts-react-official";
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
