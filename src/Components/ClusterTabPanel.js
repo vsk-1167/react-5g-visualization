@@ -28,7 +28,6 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import zIndex from "@material-ui/core/styles/zIndex";
 import { GridApi } from "ag-grid-community";
-import { Button } from "bootstrap";
 require("highcharts/modules/exporting")(Highcharts);
 
 // Data
