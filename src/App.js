@@ -13,6 +13,7 @@ import { Button, AppBar, Toolbar, Typography} from '@material-ui/core';
 //import QuoteContext from "./Contexts/QuoteContext";
 import OrganismContext from "./Contexts/OrganismContext";
 import ClusterContext from './Contexts/ClusterContext';
+import SearchNavContext from './Contexts/SearchNavContext';
 
 // Pages
 import Home from './Pages/Home.js';
@@ -42,43 +43,44 @@ const organisms = [
 
 function App() {
 
-  //const [currOrganism, setCurrOrganism] = useState(1);
-  const [currOrganismDataset, setCurrOrganismDataset] = useState([0,0]);
-  const [currCluster, setCurrCluster] = useState(0)
-
+  const [currOrganismDataset, setCurrOrganismDataset] = useState([0,0]); // format: [<currOrganismID>, <currDatasetID>]
+  const [currCluster, setCurrCluster] = useState(0)                      // format: <currCluster>
+  const [currSearchGeneResult, setCurrSearchGeneResult] = useState(["", []])  // format: ["loci", [<currOrganismID>, <currDatasetID>, <currCluster>]]
 
   return (
       <Router>
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
-            <AppBar position="static"
-                    style={{backgroundColor: '#000000'}}>
-              <Toolbar>
-                
-                <Button color="inherit">
-                  <NavLink to="/react-5g-visualization/home" style={{color: 'white', fontSize: 17}}> Home </NavLink>
-                </Button>
+            <SearchNavContext.Provider value = {{currSearchGeneResult, setCurrSearchGeneResult}}>
+              <AppBar position="static"
+                      style={{backgroundColor: '#000000'}}>
+                <Toolbar>
+                  
+                  <Button color="inherit">
+                    <NavLink to="/react-5g-visualization/home" style={{color: 'white', fontSize: 17}}> Home </NavLink>
+                  </Button>
 
-                <Button color="inherit">
-                  <NavLink to="/react-5g-visualization/search" style={{color: 'white', fontSize: 17}}> Search </NavLink>
-                </Button>
-                <div style={{flex: 1}}></div>
-                <img src={nav_bar_logo} alt="logo" style={{ height: 65,}}/>
-                
-              </Toolbar>
-            </AppBar>
+                  <Button color="inherit">
+                    <NavLink to="/react-5g-visualization/search" style={{color: 'white', fontSize: 17}}> Search </NavLink>
+                  </Button>
+                  <div style={{flex: 1}}></div>
+                  <img src={nav_bar_logo} alt="logo" style={{ height: 65,}}/>
+                  
+                </Toolbar>
+              </AppBar>
 
-            <Routes>
-              <Route path="/react-5g-visualization/home" element={<Home/>}/>
-              <Route path="/react-5g-visualization/search" element={<Search/>} />
-              <Route path="*" element={<Navigate replace to="/react-5g-visualization/error" />} />
-              {/* below are data-driven visualization pages */}
-              {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
-              <Route path="/dataset" element={<DatasetView/>}/>
-              <Route path="/cluster" element={<ClusterView/>}/>
-              <Route path="/react-5g-visualization/error" element={<ErrorPage/>}/>
-              <Route path="/react-5g-visualization/gene/:gene_id" element={<GeneView/>} />
-            </Routes>
+              <Routes>
+                <Route path="/react-5g-visualization/home" element={<Home/>}/>
+                <Route path="/react-5g-visualization/search" element={<Search/>} />
+                <Route path="*" element={<Navigate replace to="/react-5g-visualization/error" />} />
+                {/* below are data-driven visualization pages */}
+                {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
+                <Route path="/dataset" element={<DatasetView/>}/>
+                <Route path="/cluster" element={<ClusterView/>}/>
+                <Route path="/react-5g-visualization/error" element={<ErrorPage/>}/>
+                <Route path="/react-5g-visualization/gene/:gene_id" element={<GeneView/>} />
+              </Routes>
+            </SearchNavContext.Provider>
           </ClusterContext.Provider>
         </OrganismContext.Provider>
         

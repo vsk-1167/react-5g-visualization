@@ -10,9 +10,11 @@ import { useNavigate } from "react-router";
 import OrganismContext from "../Contexts/OrganismContext";
 import SplitPaneContext from "../Contexts/SplitPlaneContext";
 import ClusterContext from "../Contexts/ClusterContext";
+import SearchNavContext from "../Contexts/SearchNavContext";
 
 // Material UI Components
-import {Snackbar, Button, Grid, IconButton} from '@material-ui/core';
+import {Snackbar, Button, Grid, IconButton, 
+        Card, Container} from '@material-ui/core';
 
 /**
  * 
@@ -52,6 +54,7 @@ export const ClusterSplitPaneTop = (props) => {
   const { clientHeight, setClientHeight } = useContext(SplitPaneContext);
   const {organisms, currOrganismDataset, setCurrOrganismDataset } = useContext(OrganismContext);
   const {currCluster, setCurrCluster} = useContext(ClusterContext);
+  const {currSearchGeneResult, setCurrSearchGeneResult} = useContext(SearchNavContext)
 
   // Local Variables --> Extracting from State
   const organism_id = currOrganismDataset[0]
@@ -59,6 +62,13 @@ export const ClusterSplitPaneTop = (props) => {
   const curr_organism_name = organisms[organism_id].name;
   const curr_dataset_name = organisms[organism_id].datasets[dataset_id];
   const curr_cluster = currCluster;
+  const search_gene_loci = currSearchGeneResult[0];
+  const search_organism_id = currSearchGeneResult[1][0];
+  const search_dataset_id = currSearchGeneResult[1][1];
+  const search_cluster_id = currSearchGeneResult[1][2];
+  var showSearchResult = (search_organism_id == organism_id) && 
+                            (search_dataset_id == dataset_id) &&
+                            (search_cluster_id == curr_cluster)
 
   useEffect(() => {
     if (!clientHeight) {
@@ -76,8 +86,16 @@ export const ClusterSplitPaneTop = (props) => {
       <h1>{curr_organism_name}</h1>
       <h2 className= "black-header">Dataset: {curr_dataset_name}</h2>
       <h2 className= "black-header">Cluster: {curr_cluster}</h2>
+      {showSearchResult && <Card style={{fontSize: 15, marginRight: 15, marginLeft: 15}}>
+                            <Container>
+                              <p><strong>Last Searched Gene Loci:</strong> {search_gene_loci}</p>
+                            </Container>
+                          </Card>
+      }
     </div>
   );
+
+  
 };
       
 /**

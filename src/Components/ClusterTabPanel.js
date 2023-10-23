@@ -9,7 +9,8 @@ import {Container,
     Box, 
     Tabs, 
     Tab, 
-    Typography} from "@material-ui/core";
+    Typography, 
+    Card} from "@material-ui/core";
 import TabPanel from "./TabPanel";
 
 // Data from Azure
@@ -27,6 +28,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import zIndex from "@material-ui/core/styles/zIndex";
 import { GridApi } from "ag-grid-community";
+import { Button } from "bootstrap";
 require("highcharts/modules/exporting")(Highcharts);
 
 // Data
@@ -395,7 +397,7 @@ function ClusterTabPanel(props) {
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
           <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
             <Tab label="Cluster Data" {...a11yProps(0)} />
-            {/* <Tab label="Visualizations" {...a11yProps(1)} /> */}
+            <Tab label="Enrichment Analysis" {...a11yProps(1)} />
           </Tabs>
         </Box>
   
@@ -427,6 +429,19 @@ function ClusterTabPanel(props) {
                 ref={chartComponentRef}
               />
           </Container>
+        </TabPanel>
+        <TabPanel value={value} index={1}>
+          <Card style = {{backgroundColor: "#FFFFED", marginBottom: 20}}>
+              <Container>
+                
+                <h2>⚠️ FEATURE IN DEVELOPMENT</h2>
+                <h4>Gene Ontology Explorer</h4>
+                <p>This page will provide an exploration for the GO terms based on 
+                    their "Biological Processes (BP)", "Cellular Components (CC)", and "Molecular Functions (MF)"
+                    that were enriched in this cluster. Links to the GO Term database will be provided as well.
+                </p>
+              </Container>
+            </Card>
         </TabPanel>
   
       </Box>

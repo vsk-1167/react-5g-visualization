@@ -9,7 +9,8 @@ import {Container,
     Box, 
     Tabs, 
     Tab, 
-    Typography} from "@material-ui/core";
+    Typography, 
+    Card} from "@material-ui/core";
 import TabPanel from "./TabPanel";
 
 // Plotting
@@ -190,11 +191,27 @@ function DatasetTabPanel(props) {
             </Container>
         </TabPanel>
         <TabPanel value={value} index={1}>
-            <Container className='tabbed-panel'>
+        <Card style = {{backgroundColor: "#FFFFED", marginBottom: 20}}>
+              <Container>
+                
+                <h2>⚠️ FEATURE IN DEVELOPMENT</h2>
+                <h4>Dataset Visualizations</h4>
+                <p>There will be 2 main interactive visualizations here. 
+                </p>
+                <ul>
+                    <li><strong>UMAP Plot: </strong> An approach to visualize local and global relationships of high dimensional data 
+                                into 2 dimensions (a superior dimensionality reduction approach to only using 2 Principal Components). Each
+                                cluster will be color-encoded, and clicking a cluster will navigate user to respective Cluster View page.</li>
+                    <li><strong>Average Parallel Coordinates Plot: </strong> Visualizes the average expression profile for each cluster. 
+                            Clicking a cluster's expression profile line on the plot will take users to respective Cluster View page</li>
+                </ul>
+              </Container>
+            </Card>
+            {/* <Container className='tabbed-panel'>
             <HighchartsReact highcharts={Highcharts} options={pcaPlotOptions}/>   
             <br/>
             <HighchartsReact highcharts={Highcharts} options={tsnePlotOptions}/>   
-            </Container>
+            </Container> */}
         </TabPanel>
         </Box>
     );
