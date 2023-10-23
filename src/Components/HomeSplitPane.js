@@ -70,9 +70,9 @@ export const HomeSplitPaneTop = (props) => {
   // Navigation From Dataset Click
   const switchOrganismDataset = (orgId, datasetId) =>{
     setCurrOrganismDataset([orgId, datasetId])
-    
+
     //navigate("/dataset")
-    navigate('/dataset')
+    navigate("/dataset")
   }
     
   return (
@@ -86,7 +86,7 @@ export const HomeSplitPaneTop = (props) => {
                     {el.name}
                   </h3>
                   <Container>
-                  {el.datasets.map((data, j) => {
+                    {el.datasets.map((data, j) => {
                       return (
                         <Card style={{ minWidth: 5, padding: 3, marginBottom: 15}}>
                           <CardContent>
@@ -112,7 +112,7 @@ export const HomeSplitPaneTop = (props) => {
                   </Container>
                 </li>
               );
-        })}
+        })} 
       </ol>
       
     </div>
