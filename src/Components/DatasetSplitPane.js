@@ -118,7 +118,7 @@ export const DatasetSplitPaneBottom = (props) => {
   };
 
   const returnHome = (newState) => () => {
-    navigate("/react-5g-visualization/home")
+    navigate("/home")
   };
 
   const action = (

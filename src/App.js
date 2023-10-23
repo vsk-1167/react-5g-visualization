@@ -48,7 +48,7 @@ function App() {
   const [currSearchGeneResult, setCurrSearchGeneResult] = useState(["", []])  // format: ["loci", [<currOrganismID>, <currDatasetID>, <currCluster>]]
 
   return (
-      <Router>
+      <Router basename='react-5g-visualization'>
         <OrganismContext.Provider value={{ organisms, currOrganismDataset, setCurrOrganismDataset}}>
           <ClusterContext.Provider value={{currCluster, setCurrCluster}}>
             <SearchNavContext.Provider value = {{currSearchGeneResult, setCurrSearchGeneResult}}>
