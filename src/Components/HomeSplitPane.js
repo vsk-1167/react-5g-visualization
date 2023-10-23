@@ -70,7 +70,9 @@ export const HomeSplitPaneTop = (props) => {
   // Navigation From Dataset Click
   const switchOrganismDataset = (orgId, datasetId) =>{
     setCurrOrganismDataset([orgId, datasetId])
-    navigate("/dataset")
+    
+    //navigate("/dataset")
+    navigate('/dataset')
   }
     
   return (

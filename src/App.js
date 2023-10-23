@@ -57,11 +57,11 @@ function App() {
                 <Toolbar>
                   
                   <Button color="inherit">
-                    <NavLink to="/react-5g-visualization/home" style={{color: 'white', fontSize: 17}}> Home </NavLink>
+                    <NavLink to="/home" style={{color: 'white', fontSize: 17}}> Home </NavLink>
                   </Button>
 
                   <Button color="inherit">
-                    <NavLink to="/react-5g-visualization/search" style={{color: 'white', fontSize: 17}}> Search </NavLink>
+                    <NavLink to="/search" style={{color: 'white', fontSize: 17}}> Search </NavLink>
                   </Button>
                   <div style={{flex: 1}}></div>
                   <img src={nav_bar_logo} alt="logo" style={{ height: 65,}}/>
@@ -70,15 +70,15 @@ function App() {
               </AppBar>
 
               <Routes>
-                <Route path="/react-5g-visualization/home" element={<Home/>}/>
-                <Route path="/react-5g-visualization/search" element={<Search/>} />
-                <Route path="*" element={<Navigate replace to="/react-5g-visualization/home" />} />
+                <Route path="/home" element={<Home/>}/>
+                <Route path="/search" element={<Search/>} />
                 {/* below are data-driven visualization pages */}
                 {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
                 <Route path="/dataset" element={<DatasetView/>}/>
                 <Route path="/cluster" element={<ClusterView/>}/>
-                <Route path="/react-5g-visualization/error" element={<ErrorPage/>}/>
-                <Route path="/react-5g-visualization/gene/:gene_id" element={<GeneView/>} />
+                <Route path="/error" element={<ErrorPage/>}/>
+                {/* <Route path="/react-5g-visualization/gene/:gene_id" element={<GeneView/>} /> */}
+                <Route path="*" element={<Navigate replace to="/error" />} />
               </Routes>
             </SearchNavContext.Provider>
           </ClusterContext.Provider>
