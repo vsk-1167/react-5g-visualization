@@ -45,7 +45,7 @@ function ErrorPage() {
                         </Typography>
                         <br></br>
                         <Button variant="contained" onClick={() => {
-                            routeChange("/react-5g-visualization/home");
+                            routeChange("/home");
                         }}>
                             Return Home
                         </Button>
