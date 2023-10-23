@@ -24,7 +24,7 @@ import ErrorPage from './Pages/ErrorPage.js'
 import Search from './Pages/Search.js'
 
 import {
-  HashRouter as Router,
+  BrowserRouter as Router,
   Routes,
   Route,
   Link, 
