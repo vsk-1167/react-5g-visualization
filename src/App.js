@@ -79,7 +79,7 @@ function App() {
                 <Route path="/cluster" element={<ClusterView/>}/>
                 <Route path="/error" element={<ErrorPage/>}/>
                 {/* <Route path="/react-5g-visualization/gene/:gene_id" element={<GeneView/>} /> */}
-                {/* <Route path="*" element={<Navigate replace to="/home" />} /> */}
+                <Route path="*" element={<Navigate replace to="/home" />} />
               </Routes>
             </SearchNavContext.Provider>
           </ClusterContext.Provider>
