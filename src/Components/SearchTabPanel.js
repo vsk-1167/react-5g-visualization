@@ -291,6 +291,10 @@ function SearchTabPanel(props) {
               </Select>
             </FormControl>
           </div>
+          <div align = "left" style={{fontSize: 15, marginTop: 15, marginBottom: 15}}>
+                <p>ⓘ Click on column header in data table below to change sorting of rows 
+                  (ascending or descending) based on the column's value</p>
+          </div>
           <div className="ag-theme-alpine"
                   >
                   <AgGridReact  
@@ -346,6 +350,11 @@ function SearchTabPanel(props) {
               </Paper>
             </FormControl>
           </div> */}
+
+          <div align = "left" style={{fontSize: 15, marginTop: 15, marginBottom: 15}}>
+                <p>ⓘ Click on column header in data table below to change sorting of rows 
+                  (ascending or descending) based on the column's value</p>
+          </div>
           <div className="ag-theme-alpine"
                   >
                   <AgGridReact  style={{ width: '110%', height: '50%;' }}

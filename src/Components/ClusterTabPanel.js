@@ -402,6 +402,10 @@ function ClusterTabPanel(props) {
         </Box>
   
         <TabPanel value={value} index={0}>
+          <div align = "left" style={{fontSize: 15, marginTop: 15, marginLeft: 15, marginBottom: -20}}>
+                <p>ⓘ Click on column header in data table below to change sorting of rows 
+                  (ascending or descending) based on the column's value</p>
+          </div>
           <Container className='table-viewer'>
             <div className="ag-theme-alpine"
                     >
