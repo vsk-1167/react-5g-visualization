@@ -72,7 +72,7 @@ function App() {
               <Routes>
                 <Route path="/react-5g-visualization/home" element={<Home/>}/>
                 <Route path="/react-5g-visualization/search" element={<Search/>} />
-                <Route path="*" element={<Navigate replace to="/react-5g-visualization/error" />} />
+                <Route path="*" element={<Navigate replace to="/react-5g-visualization/home" />} />
                 {/* below are data-driven visualization pages */}
                 {/* <Route path="/dataset/:dataset_name" element={<DatasetView/>}/> */}
                 <Route path="/dataset" element={<DatasetView/>}/>
