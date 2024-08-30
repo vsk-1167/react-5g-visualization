@@ -1,6 +1,5 @@
 # Bulk RNA-seq Analysis and Cluster Explorer (BRACE)
 BRACE is a full-stack, web-hosted open-source software to present transcriptomic analyses to domain experts (built from the ground up using React JS, Azure)
-- Link to Tool: https://brace-tool.netlify.app/
 - Next Steps: visualize pre-existing bulk RNA-seq analyses for any organism of interest.
 
 
